@@ -1,17 +1,15 @@
 {
-  "name": "react-typescript",
+  "name": "hex-mirror",
   "version": "1.0.0",
-  "description": "React and TypeScript example starter project",
-  "keywords": [
-    "typescript",
-    "react",
-    "starter"
-  ],
+  "description": "Find the contrast mirror of a hex color",
+  "keywords": ["typescript", "react", "redux", "color", "contrast"],
   "main": "src/index.tsx",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.0.0",
     "loader-utils": "3.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-redux": "^9.0.0",
     "react-scripts": "5.0.1"
   },
   "devDependencies": {
