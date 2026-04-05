@@ -2,3 +2,5 @@ package-lock.json
 yarn.lock
 .DS_Store
 node-modules
+pnpm-lock.yaml
+*.log

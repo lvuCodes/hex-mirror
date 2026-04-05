@@ -1,5 +1,4 @@
-import { configureStore, ThunkDispatch } from "@reduxjs/toolkit";
-import { AnyAction } from "redux";
+import { configureStore, ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 // import colorReducer, { initialState as colorInitialState } from "./slices";
 
