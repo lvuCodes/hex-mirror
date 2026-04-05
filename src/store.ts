@@ -1,11 +1,11 @@
 import { configureStore, ThunkDispatch } from "@reduxjs/toolkit";
 import { AnyAction } from "redux";
 
-import colorReducer, { initialState as colorInitialState } from "./slices";
+// import colorReducer, { initialState as colorInitialState } from "./slices";
 
 const store = configureStore({
   reducer: {
-    color: colorReducer,
+    // color: colorReducer,
   },
 });
 
@@ -14,7 +14,7 @@ export type AppDispatch = typeof store.dispatch &
   ThunkDispatch<RootState, null, AnyAction>;
 
 export const RootInitialState: RootState = {
-  color: colorInitialState,
+  //   color: colorInitialState,
 };
 
 export default store;
