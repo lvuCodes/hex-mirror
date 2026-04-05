@@ -1,12 +1,12 @@
 import "./styles.css";
-import Input from "./components/Input";
+import DisplayBox from "./components/DisplayCard";
 
 export default function App() {
   return (
     <div className="App">
       <h1>Hex Mirror</h1>
       <h2>Provide a hexcode to find its mirror hex.</h2>
-      <Input />
+      <DisplayBox />
     </div>
   );
 }
