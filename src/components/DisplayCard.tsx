@@ -3,8 +3,8 @@ import Input from "./Input";
 import ColorBox from "./ColorBox";
 
 const Display = styled.div`
-  display: flex;
-  gap: 8px;
+  width: 20%;
+  border: 2px solid grey;
 `;
 
 const DisplayCard = () => {
