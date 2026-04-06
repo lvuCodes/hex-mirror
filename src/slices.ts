@@ -1,30 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
-import { getRandomHex, isHexCode } from "./utils";
-
-export interface ColorCard {
-  hex: string;
-  isValid?: boolean;
-  mirror?: string;
-  red?: number;
-  redComp?: number;
-  R?: string;
-  RComp?: string;
-  green?: number;
-  greenComp?: number;
-  G?: string;
-  GComp?: string;
-  blue?: number;
-  blueComp?: number;
-  B?: string;
-  BComp?: string;
-  hue?: number;
-  hueComp?: number;
-  sat?: number;
-  satComp?: number;
-  lum?: number;
-  lumComp?: number;
-}
+import { calculateHexAttr, getRandomHex, ColorCard } from "./utils";
 
 export interface ColorList {
   items: ColorCard[];
@@ -32,52 +8,13 @@ export interface ColorList {
 
 // export const initialState: ColorList = { items: [] };
 // randomized input item
+const randomHex = getRandomHex();
 const {
-  hex,
-  red,
-  redComp,
-  R,
-  RComp,
-  green,
-  G,
-  greenComp,
-  GComp,
-  blue,
-  blueComp,
-  B,
-  BComp,
-  hue,
-  hueComp,
-  sat,
-  satComp,
-  lum,
-  lumComp,
-} = getRandomHex();
+  RGB: { red, green, blue },
+} = randomHex;
+const inputAttr = calculateHexAttr({ red, green, blue });
 export const initialState: ColorList = {
-  items: [
-    {
-      hex,
-      red,
-      redComp,
-      R,
-      RComp,
-      green,
-      greenComp,
-      G,
-      GComp,
-      blue,
-      blueComp,
-      B,
-      BComp,
-      hue,
-      hueComp,
-      sat,
-      satComp,
-      lum,
-      lumComp,
-      isValid: isHexCode(hex),
-    },
-  ],
+  items: [inputAttr],
 };
 
 const colorListSlice = createSlice({

@@ -11,7 +11,7 @@ const StyledInput = styled.div`
   display: flex;
   justify-content: center;
   align-items: baseline;
-  font-size: 24px;
+  font-size: 1.2rem;
 
   input {
     max-width: 80%;
