@@ -1,27 +1,43 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "./store";
+import { getRandomHex } from "./utils";
 
-// interface ColorState {
-//   hexCode: string | null;
-// }
+export interface ColorCard {
+  hex: string;
+  isValid?: boolean;
+  mirror?: string;
+}
 
-// const initialState: ColorState = { hexCode: null };
+export interface ColorList {
+  items: ColorCard[];
+}
 
-// const colorSlice = createSlice({
-//   name: "color",
-//   initialState,
-//   reducers: {
-//     setHexCode: (state, action: PayloadAction<string>) => {
-//       state.hexCode = action.payload;
-//     },
-//   },
-// });
+// export const initialState: ColorList = { items: [] };
+// randomized input item
+export const initialState: ColorList = {
+  items: [
+    {
+      hex: getRandomHex(),
+    },
+  ],
+};
 
-// export const { setHexCode } = colorSlice.actions;
-// export default colorSlice.reducer;
+const colorListSlice = createSlice({
+  name: "colorList",
+  initialState,
+  reducers: {
+    addItem: (state, action: PayloadAction<ColorCard>) => {
+      state.items.push(action.payload);
+    },
+  },
+});
 
-// const selectColorState = ({ color }: RootState): ColorState => color;
-// export const selectHexCode = createSelector(
-//   selectColorState,
-//   ({ hexCode }) => hexCode
-// );
+export const { addItem } = colorListSlice.actions;
+export default colorListSlice.reducer;
+
+const selectColorList = ({ colorList }: RootState): ColorList => colorList;
+
+export const selectItems = createSelector(
+  selectColorList,
+  ({ items }) => items
+);
