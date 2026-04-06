@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import Input from "./Input";
 import ColorBox from "./ColorBox";
 
-const StyledDisplayCard = styled.div`
+const StyledInputCard = styled.div`
   min-width: 20%;
   max-width: 80%;
   border: 2px solid grey;
@@ -9,12 +10,13 @@ const StyledDisplayCard = styled.div`
   margin: auto;
 `;
 
-const DisplayCard = () => {
+const InputCard = () => {
   return (
-    <StyledDisplayCard>
+    <StyledInputCard>
+      <Input />
       <ColorBox />
-    </StyledDisplayCard>
+    </StyledInputCard>
   );
 };
 
-export default DisplayCard;
+export default InputCard;
