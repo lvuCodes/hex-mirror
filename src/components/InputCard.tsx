@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Input from "./Input";
 import ColorBox from "./ColorBox";
+import { useColorList } from "../hooks";
 
 const StyledInputCard = styled.div`
   min-width: 20%;
@@ -11,8 +12,13 @@ const StyledInputCard = styled.div`
 `;
 
 const InputCard = () => {
+  const { inputItem, updateItem } = useColorList();
+  const { hex, isValid } = inputItem;
+
+  const bgColor = isValid ? hex : "FFFFFF";
+
   return (
-    <StyledInputCard>
+    <StyledInputCard style={{ backgroundColor: `#${bgColor}` }}>
       <Input />
       <ColorBox />
     </StyledInputCard>

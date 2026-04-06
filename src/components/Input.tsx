@@ -16,11 +16,12 @@ const StyledInput = styled.div`
   input {
     max-width: 80%;
     border: none;
-    border-bottom: 2px solid black;
     font-family: monospace;
     font-size: 24px;
     text-align: center;
     margin: auto;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px grey;
   }
 
   .error {
@@ -31,9 +32,11 @@ const StyledInput = styled.div`
 `;
 
 const Input = () => {
-  const { inputItem } = useColorList();
+  const { inputItem, updateItem } = useColorList();
 
-  const [inputValue, setInputValue] = useState<string>(inputItem.hex);
+  const [inputValue, setInputValue] = useState<string>(
+    inputItem.hex.replace("#", "")
+  );
   const [isValid, setIsValid] = useState<boolean>(isHexCode(inputItem.hex));
 
   const inputClass = Classnames("input-field", {
@@ -41,11 +44,17 @@ const Input = () => {
   });
 
   useEffect(() => {
-    setIsValid(isHexCode(inputValue));
+    const stripped = inputValue.replace("#", "");
+    const valid = isHexCode(stripped);
+    setIsValid(valid);
+
+    if (valid) {
+      updateItem(0, { ...inputItem, hex: stripped });
+    }
   }, [inputValue]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
+    setInputValue(event.target.value.replace("#", ""));
   };
 
   return (
@@ -55,7 +64,7 @@ const Input = () => {
         type="text"
         id="hex-input"
         name="hex-input"
-        placeholder={`#${inputValue}`}
+        value={`#${inputValue.toUpperCase()}`}
         onChange={(e) => handleChange(e)}
       />
     </StyledInput>
