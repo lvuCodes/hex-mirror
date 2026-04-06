@@ -1,7 +1,10 @@
 import styled from "styled-components";
+import Input from "./Input";
 import ColorBox from "./ColorBox";
+import { useColorList } from "../hooks";
+import { isHexCode } from "../utils";
 
-const StyledDisplayCard = styled.div`
+const StyledInputCard = styled.div`
   min-width: 20%;
   max-width: 90%;
   border: 2px solid grey;
@@ -9,12 +12,18 @@ const StyledDisplayCard = styled.div`
   margin: auto;
 `;
 
-const DisplayCard = () => {
+const InputCard = () => {
+  const { inputItem } = useColorList();
+  const { hex, mirrorSet } = inputItem;
+
+  const bgColor = isHexCode(hex) ? hex : "FFFFFF";
+
   return (
-    <StyledDisplayCard>
-      <ColorBox />
-    </StyledDisplayCard>
+    <StyledInputCard style={{ backgroundColor: `#${bgColor}` }}>
+      <Input />
+      <ColorBox set={mirrorSet} />
+    </StyledInputCard>
   );
 };
 
-export default DisplayCard;
+export default InputCard;
