@@ -2,25 +2,26 @@ import styled from "styled-components";
 import Input from "./Input";
 import ColorBox from "./ColorBox";
 import { useColorList } from "../hooks";
+import { isHexCode } from "../utils";
 
 const StyledInputCard = styled.div`
   min-width: 20%;
-  max-width: 80%;
+  max-width: 90%;
   border: 2px solid grey;
   border-radius: 10px;
   margin: auto;
 `;
 
 const InputCard = () => {
-  const { inputItem, updateItem } = useColorList();
-  const { hex, isValid } = inputItem;
+  const { inputItem } = useColorList();
+  const { hex } = inputItem;
 
-  const bgColor = isValid ? hex : "FFFFFF";
+  const bgColor = isHexCode(hex) ? hex : "FFFFFF";
 
   return (
     <StyledInputCard style={{ backgroundColor: `#${bgColor}` }}>
       <Input />
-      <ColorBox />
+      <ColorBox item={inputItem} />
     </StyledInputCard>
   );
 };
