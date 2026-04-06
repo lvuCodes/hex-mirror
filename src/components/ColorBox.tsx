@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { MirrorSet } from "../utils";
 
 const StyledColorBox = styled.div`
   max-width: 90%;
@@ -22,12 +23,18 @@ const poem = [
   "    In her tomb by the sounding sea.",
 ];
 
-const ColorBox = (props) => {
-  const { item } = this.props;
+interface ColorBoxProps {
+  set: MirrorSet;
+}
+
+const ColorBox = ({ set }: ColorBoxProps) => {
+  const hexSet = Object.values(set);
   return (
     <StyledColorBox>
-      {poem.map((item) => (
-        <div>{item}</div>
+      {poem.map((line, i) => (
+        <div key={i} style={{ color: `#${hexSet[i]}` }}>
+          {`#${hexSet[i]}: ${line}`}
+        </div>
       ))}
     </StyledColorBox>
   );
