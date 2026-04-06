@@ -10,3 +10,10 @@ export default function App() {
     </div>
   );
 }
+
+// TODO
+// - dark mode
+// - copy hex
+// - note mirror hexes
+// - opacity slider
+// - submit button
