@@ -8,6 +8,7 @@ const StyledColorBox = styled.div`
   justify-content: space-between;
   align-items: baseline;
   font-size: 20px;
+  text-align: center;
 `;
 
 const ColorBox = () => {

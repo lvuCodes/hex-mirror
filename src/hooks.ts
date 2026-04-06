@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "./store";
 import { AppDispatch } from "./store";
-import { addItem, selectItems } from "./slices";
 import type { ColorCard } from "./slices";
+import { addItem, updateItem, selectItems } from "./slices";
 
 export function useColorList() {
   const dispatch = useDispatch<AppDispatch>();
@@ -12,5 +11,7 @@ export function useColorList() {
     items,
     inputItem: items[0],
     addItem: (item: ColorCard) => dispatch(addItem(item)),
+    updateItem: (index: number, item: ColorCard) =>
+      dispatch(updateItem({ index, item })),
   };
 }
