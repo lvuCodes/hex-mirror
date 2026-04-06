@@ -1,4 +1,8 @@
 import styled from "styled-components";
+import Classnames from "classnames";
+import { useColorList } from "../hooks";
+import { ChangeEvent, useEffect, useState } from "react";
+import { isHexCode } from "../utils";
 
 const StyledInput = styled.div`
   width: 90%;
@@ -18,12 +22,42 @@ const StyledInput = styled.div`
     text-align: center;
     margin: auto;
   }
+
+  .error {
+    border-bottom: 4px solid red;
+    color: red;
+    font-weight: bold;
+  }
 `;
 
 const Input = () => {
+  const { inputItem } = useColorList();
+
+  const [inputValue, setInputValue] = useState<string>(inputItem.hex);
+  const [isValid, setIsValid] = useState<boolean>(isHexCode(inputItem.hex));
+
+  const inputClass = Classnames("input-field", {
+    error: !isValid,
+  });
+
+  useEffect(() => {
+    setIsValid(isHexCode(inputValue));
+  }, [inputValue]);
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  };
+
   return (
     <StyledInput>
-      <input type="text" id="hex-input" name="hex-input" placeholder="000000" />
+      <input
+        className={inputClass}
+        type="text"
+        id="hex-input"
+        name="hex-input"
+        placeholder={`#${inputValue}`}
+        onChange={(e) => handleChange(e)}
+      />
     </StyledInput>
   );
 };
