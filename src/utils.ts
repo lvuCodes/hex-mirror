@@ -301,7 +301,7 @@ const avgHex = (list: CompareItem[]): CompareItem => {
 };
 
 export const populateState = (initial: CompareItem[]): CompareItem[] => {
-  const newList = initial.map(({ hexA, hexB }) => {
+  const newList: CompareItem[] = initial.map(({ hexA, hexB }) => {
     const rgbA = hexStringToRGB(hexA.hex);
     const rgbB = hexStringToRGB(hexB.hex);
     return {
