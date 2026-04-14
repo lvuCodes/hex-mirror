@@ -7,7 +7,7 @@ export const randomDecToHex = (): { dec: number; hex: string } => {
   return { dec, hex: decToHex(dec) };
 };
 
-export const getComplementValues = (
+export const getComplementValues = ( // move this to complement
   num: number
 ): { dec: number; hex: string } => ({
   dec: 255 - num,
