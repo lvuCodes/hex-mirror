@@ -20,7 +20,7 @@ const Hex = styled.div`
   border-radius: 10px;
   background-color: white;
   align-content: center;
-  padding: 2px;
+  padding: 3px;
   margin: 5px 15px 5px 5px;
   box-shadow: 2px 2px 2px grey;
   font-weight: normal;

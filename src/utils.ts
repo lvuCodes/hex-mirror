@@ -1,5 +1,3 @@
-import { CompareList } from "./slices/compareSlice";
-
 export interface RGBValues {
   red: number;
   green: number;
@@ -183,7 +181,7 @@ const getMirrorSet = ({
     mirror_hSL: hslToHex({ hue, sat: satComp, lum: lumComp }),
     mirror_hSl: hslToHex({ hue, sat: satComp, lum }),
     mirror_hsL: hslToHex({ hue, sat, lum: lumComp }),
-    mirror_hsl: hslToHex({ hue, sat, lum }),
+    mirror_hsl: hslToHex({ hue, sat, lum }), // this is actually the same as the og hex
   };
 };
 
@@ -235,6 +233,12 @@ export const calculateHexAttr = ({
   };
 };
 
-export const populateState = (initial: CompareList): CompareList => {
-  return initial;
+export const populateState = (initial: CompareItem[]): CompareItem[] => {
+  const newList: CompareList = {};
+
+  for (const item in initial) {
+    const { hexA, hexB } = item;
+  }
+
+  return newList;
 };
