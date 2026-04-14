@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useCompareList } from "../hooks";
 import { CompareItem } from "../utils";
+import { fmt, percentDiff } from "../utils";
 
 const StyledCompareCard = styled.div`
   min-width: 20%;
@@ -22,6 +23,28 @@ const CompareCardList = () => {
   );
 };
 
+const CompareRow = ({
+  label,
+  a,
+  b,
+}: {
+  label: string;
+  a: number | undefined;
+  b: number | undefined;
+}) => {
+  const av = a ?? 0;
+  const bv = b ?? 0;
+  return (
+    <tr>
+      <td>{label}</td>
+      <td>{fmt(av)}</td>
+      <td>{fmt(bv)}</td>
+      <td>{fmt(Math.abs(av - bv))}</td>
+      <td>{fmt(percentDiff(av, bv))}</td>
+    </tr>
+  );
+};
+
 const CompareCard = (props: { item: CompareItem }) => {
   const { hexA, hexB } = props.item;
 
@@ -30,111 +53,21 @@ const CompareCard = (props: { item: CompareItem }) => {
       <table>
         <tr>
           <th style={{ width: "20%" }}></th>
-          <th
-            style={{
-              width: "20%",
-              backgroundColor: `#${hexA.hex}`,
-              color: `#${hexB.hex}`,
-            }}
-          >
+          <th style={{ width: "20%", backgroundColor: `#${hexA.hex}`, color: `#${hexB.hex}` }}>
             {hexA.hex}
           </th>
-          <th
-            style={{
-              width: "20%",
-              backgroundColor: `#${hexB.hex}`,
-              color: `#${hexA.hex}`,
-            }}
-          >
+          <th style={{ width: "20%", backgroundColor: `#${hexB.hex}`, color: `#${hexA.hex}` }}>
             {hexB.hex}
           </th>
           <th style={{ width: "20%" }}>|diff|</th>
           <th style={{ width: "20%" }}>% diff</th>
         </tr>
-        <tr>
-          <td>Red</td>
-          <td>{hexA.RGB?.red}</td>
-          <td>{hexB.RGB?.red}</td>
-          <td>{Math.abs((hexA.RGB?.red || 0) - (hexB.RGB?.red || 0))}</td>
-          <td>
-            {String(
-              Math.abs((hexA.RGB?.red || 0) - (hexB.RGB?.red || 0)) /
-                (Math.abs((hexA.RGB?.red || 0) + (hexB.RGB?.red || 0)) / 2)
-            ).slice(0, 6)}
-          </td>
-        </tr>
-        <tr>
-          <td>Green</td>
-          <td>{hexA.RGB?.green}</td>
-          <td>{hexB.RGB?.green}</td>
-          <td>{Math.abs((hexA.RGB?.green || 0) - (hexB.RGB?.green || 0))}</td>
-          <td>
-            {String(
-              Math.abs((hexA.RGB?.green || 0) - (hexB.RGB?.green || 0)) /
-                (Math.abs((hexA.RGB?.green || 0) + (hexB.RGB?.green || 0)) / 2)
-            ).slice(0, 6)}
-          </td>
-        </tr>
-        <tr>
-          <td>Blue</td>
-          <td>{hexA.RGB?.blue}</td>
-          <td>{hexB.RGB?.blue}</td>
-          <td>{Math.abs((hexA.RGB?.blue || 0) - (hexB.RGB?.blue || 0))}</td>
-          <td>
-            {String(
-              Math.abs((hexA.RGB?.blue || 0) - (hexB.RGB?.red || 0)) /
-                (Math.abs((hexA.RGB?.blue || 0) + (hexB.RGB?.blue || 0)) / 2)
-            ).slice(0, 6)}
-          </td>
-        </tr>
-        <tr>
-          <td>Hue</td>
-          <td>{String(hexA.HSL?.hue).slice(0, 6)}</td>
-          <td>{String(hexB.HSL?.hue).slice(0, 6)}</td>
-          <td>
-            {String(
-              Math.abs((hexA.HSL?.hue || 0) - (hexB.HSL?.hue || 0))
-            ).slice(0, 6)}
-          </td>
-          <td>
-            {String(
-              Math.abs((hexA.HSL?.hue || 0) - (hexB.HSL?.hue || 0)) /
-                (Math.abs((hexA.HSL?.hue || 0) + (hexB.HSL?.hue || 0)) / 2)
-            ).slice(0, 6)}
-          </td>
-        </tr>
-        <tr>
-          <td>Saturation</td>
-          <td>{String(hexA.HSL?.sat).slice(0, 6)}</td>
-          <td>{String(hexB.HSL?.sat).slice(0, 6)}</td>
-          <td>
-            {String(
-              Math.abs((hexA.HSL?.sat || 0) - (hexB.HSL?.sat || 0))
-            ).slice(0, 6)}
-          </td>
-          <td>
-            {String(
-              Math.abs((hexA.HSL?.sat || 0) - (hexB.HSL?.sat || 0)) /
-                (Math.abs((hexA.HSL?.sat || 0) + (hexB.HSL?.sat || 0)) / 2)
-            ).slice(0, 6)}
-          </td>
-        </tr>
-        <tr>
-          <td>Lightness</td>
-          <td>{String(hexA.HSL?.lum).slice(0, 6)}</td>
-          <td>{String(hexB.HSL?.lum).slice(0, 6)}</td>
-          <td>
-            {String(
-              Math.abs((hexA.HSL?.lum || 0) - (hexB.HSL?.lum || 0))
-            ).slice(0, 6)}
-          </td>
-          <td>
-            {String(
-              Math.abs((hexA.HSL?.lum || 0) - (hexB.HSL?.lum || 0)) /
-                (Math.abs((hexA.HSL?.lum || 0) + (hexB.HSL?.lum || 0)) / 2)
-            ).slice(0, 6)}
-          </td>
-        </tr>
+        <CompareRow label="Red" a={hexA.RGB?.red} b={hexB.RGB?.red} />
+        <CompareRow label="Green" a={hexA.RGB?.green} b={hexB.RGB?.green} />
+        <CompareRow label="Blue" a={hexA.RGB?.blue} b={hexB.RGB?.blue} />
+        <CompareRow label="Hue" a={hexA.HSL?.hue} b={hexB.HSL?.hue} />
+        <CompareRow label="Saturation" a={hexA.HSL?.sat} b={hexB.HSL?.sat} />
+        <CompareRow label="Lightness" a={hexA.HSL?.lum} b={hexB.HSL?.lum} />
       </table>
     </StyledCompareCard>
   );
