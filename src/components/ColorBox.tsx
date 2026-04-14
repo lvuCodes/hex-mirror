@@ -32,9 +32,12 @@ const ColorBox = ({ set }: ColorBoxProps) => {
   return (
     <StyledColorBox>
       {poem.map((line, i) => (
-        <div key={i} style={{ color: `#${hexSet[i]}` }}>
-          {`#${hexSet[i]}: ${line}`}
-        </div>
+        <>
+          <div>{`#${hexSet[i]}: `}</div>
+          <div key={i} style={{ color: `#${hexSet[i]}` }}>
+            {`${line}`}
+          </div>
+        </>
       ))}
     </StyledColorBox>
   );

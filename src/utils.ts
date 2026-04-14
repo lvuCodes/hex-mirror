@@ -1,3 +1,5 @@
+import { CompareList } from "./slices/compareSlice";
+
 export interface RGBValues {
   red: number;
   green: number;
@@ -231,4 +233,8 @@ export const calculateHexAttr = ({
     HSLComp: { hue: 360 - hue, sat: 1 - sat, lum: 1 - lum },
     mirrorSet,
   };
+};
+
+export const populateState = (initial: CompareList): CompareList => {
+  return initial;
 };
