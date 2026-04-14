@@ -50,7 +50,7 @@ const compareListSlice = createSlice({
 export const { addItem, updateItem } = compareListSlice.actions;
 export default compareListSlice.reducer;
 
-export const selectItems = createSelector(
+export const selectList = createSelector(
   ({ compareList }: RootState) => compareList,
   (items) => items
 );
