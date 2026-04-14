@@ -2,9 +2,9 @@ export interface RGBValues {
   red: number;
   green: number;
   blue: number;
-  R: string;
-  G: string;
-  B: string;
+  R?: string;
+  G?: string;
+  B?: string;
 }
 
 export interface HSLValues {
@@ -43,7 +43,6 @@ export interface CompareItem {
   hexA: HexEntry;
   hexB: HexEntry;
 }
-
 
 export const isHexCode = (input: string) => {
   const hexRegex: RegExp = /^([0-9A-Fa-f]{3}){1,2}$/;
@@ -234,26 +233,103 @@ export const calculateHexAttr = ({
   };
 };
 
-const hexStringToRGB = (hex: string): { red: number; green: number; blue: number } => ({
+const hexStringToRGB = (
+  hex: string
+): { red: number; green: number; blue: number } => ({
   red: hexToDec(hex.slice(0, 2)),
   green: hexToDec(hex.slice(2, 4)),
   blue: hexToDec(hex.slice(4, 6)),
 });
 
-export const populateState = (initial: CompareItem[]): CompareItem[] =>
-  initial.map(({ hexA, hexB }) => {
+const avgHex = (list: CompareItem[]): CompareItem => {
+  const length = list.length;
+  let redSum: number = 0,
+    greenSum: number = 0,
+    blueSum: number = 0,
+    hueSum: number = 0,
+    satSum: number = 0,
+    lumSum: number = 0;
+  list.map(({ hexA, hexB }) => {
+    const redAbsDiff = Math.abs((hexA.RGB?.red || 0) - (hexB.RGB?.red || 0));
+    const greenAbsDiff = Math.abs(
+      (hexA.RGB?.green || 0) - (hexB.RGB?.green || 0)
+    );
+    const blueAbsDiff = Math.abs((hexA.RGB?.blue || 0) - (hexB.RGB?.blue || 0));
+    const hueAbsDiff = Math.abs((hexA.HSL?.hue || 0) - (hexB.HSL?.hue || 0));
+    const satAbsDiff = Math.abs((hexA.HSL?.sat || 0) - (hexB.HSL?.sat || 0));
+    const lumAbsDiff = Math.abs((hexA.HSL?.lum || 0) - (hexB.HSL?.lum || 0));
+
+    redSum += redAbsDiff;
+    greenSum += greenAbsDiff;
+    blueSum += blueAbsDiff;
+    hueSum += hueAbsDiff;
+    satSum += satAbsDiff;
+    lumSum += lumAbsDiff;
+  });
+  const redAvg = redSum / length;
+  const greenAvg = greenSum / length;
+  const blueAvg = blueSum / length;
+  const hueAvg = hueSum / length;
+  const satAvg = satSum / length;
+  const lumAvg = lumSum / length;
+
+  return {
+    hexA: {
+      hex: `#${decToHex(redAvg)}${decToHex(greenAvg)}${decToHex(blueAvg)}`,
+      RGB: {
+        red: redAvg,
+        green: greenAvg,
+        blue: blueAvg,
+      },
+      HSL: getHSL({ red: redAvg, green: greenAvg, blue: blueAvg }),
+    },
+    hexB: {
+      hex: hslToHex({ hue: hueAvg, sat: satAvg, lum: lumAvg }),
+      RGB: {
+        red: hexStringToRGB(hslToHex({ hue: hueAvg, sat: satAvg, lum: lumAvg }))
+          .red,
+        green: hexStringToRGB(
+          hslToHex({ hue: hueAvg, sat: satAvg, lum: lumAvg })
+        ).green,
+        blue: hexStringToRGB(
+          hslToHex({ hue: hueAvg, sat: satAvg, lum: lumAvg })
+        ).blue,
+      },
+      HSL: { hue: hueAvg, sat: satAvg, lum: lumAvg },
+    },
+  };
+};
+
+export const populateState = (initial: CompareItem[]): CompareItem[] => {
+  const newList = initial.map(({ hexA, hexB }) => {
     const rgbA = hexStringToRGB(hexA.hex);
     const rgbB = hexStringToRGB(hexB.hex);
     return {
       hexA: {
         hex: hexA.hex,
-        RGB: { ...rgbA, R: decToHex(rgbA.red), G: decToHex(rgbA.green), B: decToHex(rgbA.blue) },
+        RGB: {
+          ...rgbA,
+          R: decToHex(rgbA.red),
+          G: decToHex(rgbA.green),
+          B: decToHex(rgbA.blue),
+        },
         HSL: getHSL(rgbA),
       },
       hexB: {
         hex: hexB.hex,
-        RGB: { ...rgbB, R: decToHex(rgbB.red), G: decToHex(rgbB.green), B: decToHex(rgbB.blue) },
+        RGB: {
+          ...rgbB,
+          R: decToHex(rgbB.red),
+          G: decToHex(rgbB.green),
+          B: decToHex(rgbB.blue),
+        },
         HSL: getHSL(rgbB),
       },
     };
   });
+
+  const average: CompareItem = avgHex(newList);
+  console.log(newList.push(average));
+
+  return newList;
+};
