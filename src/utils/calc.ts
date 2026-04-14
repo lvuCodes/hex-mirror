@@ -4,5 +4,5 @@ export const arrayAvg = (arr: number[]): number =>
 export const percentDiff = (a: number, b: number): number =>
   Math.abs(a - b) / ((a + b) / 2);
 
-export const fmt = (n: number | undefined): string =>
+export const format = (n: number | undefined): string =>
   String(n ?? 0).slice(0, 6);

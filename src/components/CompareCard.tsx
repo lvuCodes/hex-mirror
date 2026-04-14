@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useCompareList } from "../hooks";
 import { CompareItem } from "../utils";
-import { fmt, percentDiff } from "../utils";
+import { format, percentDiff } from "../utils";
 
 const StyledCompareCard = styled.div`
   min-width: 20%;
@@ -37,10 +37,10 @@ const CompareRow = ({
   return (
     <tr>
       <td>{label}</td>
-      <td>{fmt(av)}</td>
-      <td>{fmt(bv)}</td>
-      <td>{fmt(Math.abs(av - bv))}</td>
-      <td>{fmt(percentDiff(av, bv))}</td>
+      <td>{format(av)}</td>
+      <td>{format(bv)}</td>
+      <td>{format(Math.abs(av - bv))}</td>
+      <td>{format(percentDiff(av, bv))}</td>
     </tr>
   );
 };

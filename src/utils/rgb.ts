@@ -1,6 +1,7 @@
 import { decToHex } from "./hex";
 import { randomDecToHex, getComplementValues } from "./dec";
-import { HSLValues, MirrorSet, getHSL, getMirrorSet } from "./hsl";
+import { HSLValues, getHSL } from "./hsl";
+import { MirrorSet, getMirrorSet } from "./comp";
 
 export interface RGBValues {
   red: number;
