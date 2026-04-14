@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useCompareList } from "../hooks";
 import { CompareItem } from "../utils";
-import { format, percentDiff } from "../utils";
+import { format, absPercentDiff } from "../utils";
 
 const StyledCompareCard = styled.div`
   min-width: 20%;
@@ -40,7 +40,7 @@ const CompareRow = ({
       <td>{format(av)}</td>
       <td>{format(bv)}</td>
       <td>{format(Math.abs(av - bv))}</td>
-      <td>{format(percentDiff(av, bv))}</td>
+      <td>{format(absPercentDiff(av, bv))}</td>
     </tr>
   );
 };
@@ -53,10 +53,22 @@ const CompareCard = (props: { item: CompareItem }) => {
       <table>
         <tr>
           <th style={{ width: "20%" }}></th>
-          <th style={{ width: "20%", backgroundColor: `#${hexA.hex}`, color: `#${hexB.hex}` }}>
+          <th
+            style={{
+              width: "20%",
+              backgroundColor: `#${hexA.hex}`,
+              color: `#${hexB.hex}`,
+            }}
+          >
             {hexA.hex}
           </th>
-          <th style={{ width: "20%", backgroundColor: `#${hexB.hex}`, color: `#${hexA.hex}` }}>
+          <th
+            style={{
+              width: "20%",
+              backgroundColor: `#${hexB.hex}`,
+              color: `#${hexA.hex}`,
+            }}
+          >
             {hexB.hex}
           </th>
           <th style={{ width: "20%" }}>|diff|</th>
