@@ -18,10 +18,12 @@ const Line = styled.div`
 
 const Hex = styled.div`
   border-radius: 10px;
-  border: 1px solid black;
   background-color: white;
   align-content: center;
   padding: 2px;
+  margin: 5px 15px 5px 5px;
+  box-shadow: 2px 2px 2px grey;
+  font-weight: normal;
 `;
 
 const poem = [
@@ -47,7 +49,7 @@ const ColorBox = ({ set }: ColorBoxProps) => {
         <Line>
           <Hex>{`#${hexSet[i]}:`}</Hex>
           <div key={i} style={{ color: `#${hexSet[i]}` }}>
-            {`  ${line}`}
+            {`${line}`}
           </div>
         </Line>
       ))}
