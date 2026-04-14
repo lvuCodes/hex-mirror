@@ -36,13 +36,13 @@ const compareListSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action: PayloadAction<CompareItem>) => {
-      state.items.push(action.payload);
+      state.push(action.payload);
     },
     updateItem: (
       state,
       action: PayloadAction<{ index: number; item: CompareItem }>
     ) => {
-      state.items[action.payload.index] = action.payload.item;
+      state[action.payload.index] = action.payload.item;
     },
   },
 });
@@ -50,10 +50,7 @@ const compareListSlice = createSlice({
 export const { addItem, updateItem } = compareListSlice.actions;
 export default compareListSlice.reducer;
 
-const selectCompareList = ({ compareList }: RootState): CompareList =>
-  compareList;
-
 export const selectItems = createSelector(
-  selectCompareList,
-  ({ items }) => items
+  ({ compareList }: RootState) => compareList,
+  (items) => items
 );

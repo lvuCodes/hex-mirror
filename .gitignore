@@ -4,3 +4,4 @@ yarn.lock
 node-modules
 pnpm-lock.yaml
 *.log
+node_modules

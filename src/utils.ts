@@ -44,6 +44,7 @@ export interface CompareItem {
   hexB: HexEntry;
 }
 
+
 export const isHexCode = (input: string) => {
   const hexRegex: RegExp = /^([0-9A-Fa-f]{3}){1,2}$/;
   return hexRegex.test(input);
@@ -233,12 +234,26 @@ export const calculateHexAttr = ({
   };
 };
 
-export const populateState = (initial: CompareItem[]): CompareItem[] => {
-  const newList: CompareList = {};
+const hexStringToRGB = (hex: string): { red: number; green: number; blue: number } => ({
+  red: hexToDec(hex.slice(0, 2)),
+  green: hexToDec(hex.slice(2, 4)),
+  blue: hexToDec(hex.slice(4, 6)),
+});
 
-  for (const item in initial) {
-    const { hexA, hexB } = item;
-  }
-
-  return newList;
-};
+export const populateState = (initial: CompareItem[]): CompareItem[] =>
+  initial.map(({ hexA, hexB }) => {
+    const rgbA = hexStringToRGB(hexA.hex);
+    const rgbB = hexStringToRGB(hexB.hex);
+    return {
+      hexA: {
+        hex: hexA.hex,
+        RGB: { ...rgbA, R: decToHex(rgbA.red), G: decToHex(rgbA.green), B: decToHex(rgbA.blue) },
+        HSL: getHSL(rgbA),
+      },
+      hexB: {
+        hex: hexB.hex,
+        RGB: { ...rgbB, R: decToHex(rgbB.red), G: decToHex(rgbB.green), B: decToHex(rgbB.blue) },
+        HSL: getHSL(rgbB),
+      },
+    };
+  });
