@@ -29,10 +29,10 @@ const CompareCard = (props: { item: CompareItem }) => {
     <StyledCompareCard>
       <table>
         <tr>
-          <th style={{ width: "25%" }}></th>
+          <th style={{ width: "20%" }}></th>
           <th
             style={{
-              width: "25%",
+              width: "20%",
               backgroundColor: `#${hexA.hex}`,
               color: `#${hexB.hex}`,
             }}
@@ -41,32 +41,51 @@ const CompareCard = (props: { item: CompareItem }) => {
           </th>
           <th
             style={{
-              width: "25%",
+              width: "20%",
               backgroundColor: `#${hexB.hex}`,
               color: `#${hexA.hex}`,
             }}
           >
             {hexB.hex}
           </th>
-          <th style={{ width: "25%" }}>|diff|</th>
+          <th style={{ width: "20%" }}>|diff|</th>
+          <th style={{ width: "20%" }}>% diff</th>
         </tr>
         <tr>
           <td>Red</td>
           <td>{hexA.RGB?.red}</td>
           <td>{hexB.RGB?.red}</td>
           <td>{Math.abs((hexA.RGB?.red || 0) - (hexB.RGB?.red || 0))}</td>
+          <td>
+            {String(
+              Math.abs((hexA.RGB?.red || 0) - (hexB.RGB?.red || 0)) /
+                (Math.abs((hexA.RGB?.red || 0) + (hexB.RGB?.red || 0)) / 2)
+            ).slice(0, 6)}
+          </td>
         </tr>
         <tr>
           <td>Green</td>
           <td>{hexA.RGB?.green}</td>
           <td>{hexB.RGB?.green}</td>
           <td>{Math.abs((hexA.RGB?.green || 0) - (hexB.RGB?.green || 0))}</td>
+          <td>
+            {String(
+              Math.abs((hexA.RGB?.green || 0) - (hexB.RGB?.green || 0)) /
+                (Math.abs((hexA.RGB?.green || 0) + (hexB.RGB?.green || 0)) / 2)
+            ).slice(0, 6)}
+          </td>
         </tr>
         <tr>
           <td>Blue</td>
           <td>{hexA.RGB?.blue}</td>
           <td>{hexB.RGB?.blue}</td>
           <td>{Math.abs((hexA.RGB?.blue || 0) - (hexB.RGB?.blue || 0))}</td>
+          <td>
+            {String(
+              Math.abs((hexA.RGB?.blue || 0) - (hexB.RGB?.red || 0)) /
+                (Math.abs((hexA.RGB?.blue || 0) + (hexB.RGB?.blue || 0)) / 2)
+            ).slice(0, 6)}
+          </td>
         </tr>
         <tr>
           <td>Hue</td>
@@ -75,6 +94,12 @@ const CompareCard = (props: { item: CompareItem }) => {
           <td>
             {String(
               Math.abs((hexA.HSL?.hue || 0) - (hexB.HSL?.hue || 0))
+            ).slice(0, 6)}
+          </td>
+          <td>
+            {String(
+              Math.abs((hexA.HSL?.hue || 0) - (hexB.HSL?.hue || 0)) /
+                (Math.abs((hexA.HSL?.hue || 0) + (hexB.HSL?.hue || 0)) / 2)
             ).slice(0, 6)}
           </td>
         </tr>
@@ -87,6 +112,12 @@ const CompareCard = (props: { item: CompareItem }) => {
               Math.abs((hexA.HSL?.sat || 0) - (hexB.HSL?.sat || 0))
             ).slice(0, 6)}
           </td>
+          <td>
+            {String(
+              Math.abs((hexA.HSL?.sat || 0) - (hexB.HSL?.sat || 0)) /
+                (Math.abs((hexA.HSL?.sat || 0) + (hexB.HSL?.sat || 0)) / 2)
+            ).slice(0, 6)}
+          </td>
         </tr>
         <tr>
           <td>Lightness</td>
@@ -95,6 +126,12 @@ const CompareCard = (props: { item: CompareItem }) => {
           <td>
             {String(
               Math.abs((hexA.HSL?.lum || 0) - (hexB.HSL?.lum || 0))
+            ).slice(0, 6)}
+          </td>
+          <td>
+            {String(
+              Math.abs((hexA.HSL?.lum || 0) - (hexB.HSL?.lum || 0)) /
+                (Math.abs((hexA.HSL?.lum || 0) + (hexB.HSL?.lum || 0)) / 2)
             ).slice(0, 6)}
           </td>
         </tr>
