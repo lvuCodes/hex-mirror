@@ -12,6 +12,18 @@ const StyledColorBox = styled.div`
   font-weight: bold;
 `;
 
+const Line = styled.div`
+  display: flex;
+`;
+
+const Hex = styled.div`
+  border-radius: 10px;
+  border: 1px solid black;
+  background-color: white;
+  align-content: center;
+  padding: 2px;
+`;
+
 const poem = [
   "For the moon never beams, without bringing me dreams",
   "    Of the beautiful Annabel Lee;",
@@ -32,9 +44,12 @@ const ColorBox = ({ set }: ColorBoxProps) => {
   return (
     <StyledColorBox>
       {poem.map((line, i) => (
-        <div key={i} style={{ color: `#${hexSet[i]}` }}>
-          {`#${hexSet[i]}: ${line}`}
-        </div>
+        <Line>
+          <Hex>{`#${hexSet[i]}:`}</Hex>
+          <div key={i} style={{ color: `#${hexSet[i]}` }}>
+            {`  ${line}`}
+          </div>
+        </Line>
       ))}
     </StyledColorBox>
   );
