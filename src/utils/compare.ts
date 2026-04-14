@@ -108,12 +108,3 @@ export const populateState = (initial: CompareItem[]): CompareItem[] => {
   return newList;
 };
 
-// WIP: percent-diff based complement
-const RGB_MP = 255 / 2;
-const HUE_MP = 360 / 2;
-const SL_MP = 1 / 2;
-
-export const getPercentDiffComp = (hex: string): string => {
-  const _rgb = hexStringToRGB(hex);
-  return hex;
-};
