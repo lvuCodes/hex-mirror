@@ -2,11 +2,15 @@ import { configureStore, ThunkDispatch, AnyAction } from "@reduxjs/toolkit";
 
 import colorListReducer, {
   initialState as colorListInitialState,
-} from "./slices";
+} from "./slices/colorSlice";
+import compareListReducer, {
+  initialState as compareListInitialState,
+} from "./slices/compareSlice";
 
 const store = configureStore({
   reducer: {
     colorList: colorListReducer,
+    compareList: compareListReducer,
   },
 });
 
@@ -16,6 +20,7 @@ export type AppDispatch = typeof store.dispatch &
 
 export const RootInitialState: RootState = {
   colorList: colorListInitialState,
+  compareList: compareListInitialState,
 };
 
 export default store;
