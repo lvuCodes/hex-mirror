@@ -169,6 +169,7 @@ const getMirrorSet = ({
   sat: number;
   lum: number;
 }) => {
+  const hex = hslToHex({ hue, sat, lum });
   const hueComp = 360 - hue;
   const satComp = 1 - sat;
   const lumComp = 1 - lum;
@@ -181,7 +182,9 @@ const getMirrorSet = ({
     mirror_hSL: hslToHex({ hue, sat: satComp, lum: lumComp }),
     mirror_hSl: hslToHex({ hue, sat: satComp, lum }),
     mirror_hsL: hslToHex({ hue, sat, lum: lumComp }),
-    mirror_hsl: hslToHex({ hue, sat, lum }), // this is actually the same as the og hex
+    mirror_hsl: getGSheetsComp(hex), // this is actually the same as the og hex
+    // mirror_hsl is the same as the OG hex
+    // so we replace with the Google Sheet Complement
   };
 };
 
@@ -242,14 +245,24 @@ const hexStringToRGB = (
 });
 
 const avgHex = (list: CompareItem[]): CompareItem => {
-  const length = list.length;
-  let redSum: number = 0,
-    greenSum: number = 0,
-    blueSum: number = 0,
-    hueSum: number = 0,
-    satSum: number = 0,
-    lumSum: number = 0;
+  let length = list.length;
+  const redSum: number[] = [],
+    greenSum: number[] = [],
+    blueSum: number[] = [],
+    hueSum: number[] = [],
+    satSum: number[] = [],
+    lumSum: number[] = [],
+    redPercent: number[] = [],
+    greenPercent: number[] = [],
+    bluePercent: number[] = [],
+    huePercent: number[] = [],
+    satPercent: number[] = [],
+    lumPercent: number[] = [];
   list.map(({ hexA, hexB }) => {
+    if (hexA.hex == hexB.hex) {
+      length -= 1;
+      return;
+    }
     const redAbsDiff = Math.abs((hexA.RGB?.red || 0) - (hexB.RGB?.red || 0));
     const greenAbsDiff = Math.abs(
       (hexA.RGB?.green || 0) - (hexB.RGB?.green || 0)
@@ -259,23 +272,73 @@ const avgHex = (list: CompareItem[]): CompareItem => {
     const satAbsDiff = Math.abs((hexA.HSL?.sat || 0) - (hexB.HSL?.sat || 0));
     const lumAbsDiff = Math.abs((hexA.HSL?.lum || 0) - (hexB.HSL?.lum || 0));
 
-    redSum += redAbsDiff;
-    greenSum += greenAbsDiff;
-    blueSum += blueAbsDiff;
-    hueSum += hueAbsDiff;
-    satSum += satAbsDiff;
-    lumSum += lumAbsDiff;
+    redSum.push(redAbsDiff);
+    greenSum.push(greenAbsDiff);
+    blueSum.push(blueAbsDiff);
+    hueSum.push(hueAbsDiff);
+    satSum.push(satAbsDiff);
+    lumSum.push(lumAbsDiff);
+
+    const rPercent =
+      redAbsDiff / ((hexA.RGB?.red || 0) + (hexB.RGB?.red || 0) / 2);
+    const bPercent =
+      greenAbsDiff / ((hexA.RGB?.green || 0) + (hexB.RGB?.green || 0) / 2);
+    const gPercent =
+      blueAbsDiff / ((hexA.RGB?.blue || 0) + (hexB.RGB?.blue || 0) / 2);
+    const hPercent =
+      hueAbsDiff / ((hexA.HSL?.hue || 0) + (hexB.HSL?.hue || 0) / 2);
+    const sPercent =
+      satAbsDiff / ((hexA.HSL?.sat || 0) + (hexB.HSL?.sat || 0) / 2);
+    const lPercent =
+      lumAbsDiff / ((hexA.HSL?.lum || 0) + (hexB.HSL?.lum || 0) / 2);
+
+    redPercent.push(rPercent);
+    greenPercent.push(bPercent);
+    bluePercent.push(gPercent);
+    huePercent.push(hPercent);
+    satPercent.push(sPercent);
+    lumPercent.push(lPercent);
   });
-  const redAvg = redSum / length;
-  const greenAvg = greenSum / length;
-  const blueAvg = blueSum / length;
-  const hueAvg = hueSum / length;
-  const satAvg = satSum / length;
-  const lumAvg = lumSum / length;
+
+  // arr.reduce((sum, val) => sum + val, 0) / arr.length;
+  const redAvg = Math.round(redSum.reduce((sum, val) => sum + val, 0) / length);
+  const greenAvg = Math.round(
+    greenSum.reduce((sum, val) => sum + val, 0) / length
+  );
+  const blueAvg = Math.round(
+    blueSum.reduce((sum, val) => sum + val, 0) / length
+  );
+  const hueAvg = hueSum.reduce((sum, val) => sum + val, 0) / length;
+  const satAvg = satSum.reduce((sum, val) => sum + val, 0) / length;
+  const lumAvg = lumSum.reduce((sum, val) => sum + val, 0) / length;
+  console.log(
+    "redPercDiffAvg:",
+    redPercent.reduce((sum, val) => sum + val, 0) / length
+  );
+  console.log(
+    "greenPercDiffAvg:",
+    greenPercent.reduce((sum, val) => sum + val, 0) / length
+  );
+  console.log(
+    "bluePercDiffAvg:",
+    bluePercent.reduce((sum, val) => sum + val, 0) / length
+  );
+  console.log(
+    "huePercDiffAvg:",
+    huePercent.reduce((sum, val) => sum + val, 0) / length
+  );
+  console.log(
+    "satPercDiffAvg:",
+    satPercent.reduce((sum, val) => sum + val, 0) / length
+  );
+  console.log(
+    "lumPercDiffAvg:",
+    lumPercent.reduce((sum, val) => sum + val, 0) / length
+  );
 
   return {
     hexA: {
-      hex: `#${decToHex(redAvg)}${decToHex(greenAvg)}${decToHex(blueAvg)}`,
+      hex: `${decToHex(redAvg)}${decToHex(greenAvg)}${decToHex(blueAvg)}`,
       RGB: {
         red: redAvg,
         green: greenAvg,
@@ -328,8 +391,65 @@ export const populateState = (initial: CompareItem[]): CompareItem[] => {
     };
   });
 
-  const average: CompareItem = avgHex(newList);
-  console.log(newList.push(average));
+  newList.push(avgHex(newList));
 
   return newList;
+};
+
+// Average Absolute Diff - Google Sheets dark vs light
+//              737373    757171    |diff|    % diff
+// Red          115       117         2       0.0172
+// Green        115       113         2       0.0175
+// Blue         115       113         2       0.0175
+// Hue          0         0.8802    0.8802    2
+// Saturation   0         0.0200    0.0200    2
+// Lightness    0.4509    0.4511    0.0001    0.0003
+
+const RGB_CHANGE = 113 + Math.round(Math.random() * 4);
+const HUE_CHANGE = 0.88;
+const SAT_CHANGE = 0.02;
+const LUM_CHANGE =
+  0.4 + Number.parseFloat(String(Math.random() * 0.1).slice(0, 6));
+
+const getGSheetsComp = (hex: string): string => {
+  const rgb = hexStringToRGB(hex);
+  const hsl = getHSL(rgb);
+  const { lum } = hsl;
+
+  const change = lum < 0.5 ? "light" : "dark"; // low lum = dark
+
+  let redNew: number = rgb.red,
+    greenNew: number = rgb.green,
+    blueNew: number = rgb.blue,
+    hueNew: number = hsl.hue,
+    satNew: number = hsl.sat,
+    lumNew: number = hsl.lum;
+
+  if (change == "light") {
+    redNew += RGB_CHANGE;
+    greenNew += RGB_CHANGE;
+    blueNew += RGB_CHANGE;
+    hueNew += HUE_CHANGE;
+    satNew += SAT_CHANGE;
+    lumNew += LUM_CHANGE;
+  } else {
+    redNew -= RGB_CHANGE;
+    greenNew -= RGB_CHANGE;
+    blueNew -= RGB_CHANGE;
+    hueNew -= HUE_CHANGE;
+    satNew -= SAT_CHANGE;
+    lumNew -= LUM_CHANGE;
+  }
+
+  return `${decToHex(redNew)}${decToHex(greenNew)}${decToHex(blueNew)}`;
+};
+
+const RGB_MP = 255 / 2;
+const HUE_MP = 360 / 2;
+const SL_MP = 1 / 2;
+
+const getPercentDiffComp = (hex: string): string => {
+  const rgb = hexStringToRGB(hex);
+
+  return hex;
 };
