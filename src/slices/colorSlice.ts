@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "./store";
-import { calculateHexAttr, getRandomHex, ColorCard } from "./utils";
+import type { RootState } from "../store";
+import { calculateHexAttr, getRandomHex, ColorCard } from "../utils";
 
 export interface ColorList {
   items: ColorCard[];
