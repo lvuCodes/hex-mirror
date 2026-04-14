@@ -1,12 +1,12 @@
 import "./styles.css";
-import DisplayCard from "./components/DisplayCard";
+import InputCard from "./components/DisplayCard";
 
 export default function App() {
   return (
     <div className="App">
       <h1>Hex Mirror</h1>
       <h2>Provide a hexcode to find its mirror hex.</h2>
-      <DisplayCard />
+      <InputCard />
     </div>
   );
 }
@@ -14,6 +14,7 @@ export default function App() {
 // TODO
 // - dark mode
 // - copy hex
-// - note mirror hexes
 // - opacity slider
 // - submit button
+// - hover state to indicate which mirror hex
+
