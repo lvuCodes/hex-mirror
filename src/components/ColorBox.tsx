@@ -18,7 +18,7 @@ const Line = styled.div`
 
 const Hex = styled.div`
   border-radius: 10px;
-  background-color: white;
+  background-color: #eeeeee;
   align-content: center;
   padding: 2px 4px;
   margin: 5px 15px 5px 5px;
