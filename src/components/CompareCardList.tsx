@@ -3,6 +3,9 @@ import { useCompareList } from "../hooks";
 import { CompareItem } from "../utils";
 import { format, absPercentDiff } from "../utils";
 
+// This component is primarily used to determine various calculations
+// It is useful but should not be exposed to the user
+
 const StyledCompareCard = styled.div`
   min-width: 20%;
   max-width: 90%;
