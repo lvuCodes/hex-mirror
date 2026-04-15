@@ -1,4 +1,4 @@
-import { decToHex, hexStringToRGB } from "./hex";
+import { decToHex, hexStringToRGB } from "./hexadecimal";
 import { getHSL, hslToHex } from "./hsl";
 import { RGBValues } from "./rgb";
 import { HSLValues } from "./hsl";

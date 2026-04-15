@@ -27,6 +27,7 @@ const Hex = styled.div`
 `;
 
 const poem = [
+  "Excerpt from Annabel Lee by Edgar Allen Poe",
   "For the moon never beams, without bringing me dreams",
   "    Of the beautiful Annabel Lee;",
   "And the stars never rise, but I feel the bright eyes",
