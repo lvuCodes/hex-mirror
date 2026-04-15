@@ -91,33 +91,20 @@ const avgHex = (list: CompareItem[]): CompareItem => {
   };
 };
 
-export const populateState = (initial: CompareItem[]): CompareItem[] => {
-  const newList: CompareItem[] = initial.map(({ hexA, hexB }) => {
-    const rgbA = hexStringToRGB(hexA.hex);
-    const rgbB = hexStringToRGB(hexB.hex);
-    return {
-      hexA: {
-        hex: hexA.hex,
-        RGB: {
-          ...rgbA,
-          R: decToHex(rgbA.red),
-          G: decToHex(rgbA.green),
-          B: decToHex(rgbA.blue),
-        },
-        HSL: getHSL(rgbA),
-      },
-      hexB: {
-        hex: hexB.hex,
-        RGB: {
-          ...rgbB,
-          R: decToHex(rgbB.red),
-          G: decToHex(rgbB.green),
-          B: decToHex(rgbB.blue),
-        },
-        HSL: getHSL(rgbB),
-      },
-    };
-  });
+export const populateHexEntry = (entry: HexEntry): HexEntry => {
+  const rgb = hexStringToRGB(entry.hex);
+  return {
+    hex: entry.hex,
+    RGB: { ...rgb, R: decToHex(rgb.red), G: decToHex(rgb.green), B: decToHex(rgb.blue) },
+    HSL: getHSL(rgb),
+  };
+};
+
+export const populateHexList = (initial: CompareItem[]): CompareItem[] => {
+  const newList: CompareItem[] = initial.map(({ hexA, hexB }) => ({
+    hexA: populateHexEntry(hexA),
+    hexB: populateHexEntry(hexB),
+  }));
 
   newList.push(avgHex(newList));
 

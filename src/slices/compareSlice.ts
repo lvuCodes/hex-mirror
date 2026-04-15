@@ -1,6 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from "../store";
-import { CompareItem, populateState } from "../utils";
+import { CompareItem, populateHexList } from "../utils";
 
 const sampleState: CompareItem[] = [
   { hexA: { hex: "3e0f3d" }, hexB: { hex: "f0c1ef" } },
@@ -29,7 +29,7 @@ const sampleState: CompareItem[] = [
   { hexA: { hex: "6a0010" }, hexB: { hex: "ff96a5" } },
 ];
 
-export const initialState = populateState(sampleState);
+export const initialState = populateHexList(sampleState);
 
 const compareListSlice = createSlice({
   name: "compareList",
