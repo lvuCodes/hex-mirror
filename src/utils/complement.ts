@@ -1,4 +1,3 @@
-import { absPercentDiff, percentDiff } from "./calc";
 import { decToHex, hexStringToRGB } from "./hexadecimal";
 import { getHSL, hslToHex } from "./hsl";
 

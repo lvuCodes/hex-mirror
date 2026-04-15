@@ -7,7 +7,7 @@ import { isHexCode } from "../utils";
 const StyledInputCard = styled.div`
   min-width: 20%;
   max-width: 90%;
-  border: 2px solid grey;
+  border: 4px solid grey;
   border-radius: 10px;
   margin: auto;
 `;
@@ -17,9 +17,12 @@ const InputCard = () => {
   const { hex, mirrorSet } = inputItem;
 
   const bgColor = isHexCode(hex) ? hex : "FFFFFF";
+  const borderColor = mirrorSet.mirror_midpoint || "000000";
 
   return (
-    <StyledInputCard style={{ backgroundColor: `#${bgColor}` }}>
+    <StyledInputCard
+      style={{ backgroundColor: `#${bgColor}`, borderColor: `#${borderColor}` }}
+    >
       <Input />
       <ColorBox set={mirrorSet} />
     </StyledInputCard>
