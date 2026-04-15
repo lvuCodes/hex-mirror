@@ -1,4 +1,4 @@
-import { decToHex } from "./hex";
+import { decToHex } from "./hexadecimal";
 
 export interface HSLValues {
   hue: number;
@@ -87,4 +87,3 @@ export const hslToHex = ({
 
   return `${R}${G}${B}`;
 };
-

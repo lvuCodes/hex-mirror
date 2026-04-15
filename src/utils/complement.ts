@@ -1,5 +1,5 @@
-import { absPercentDiff } from "./calc";
-import { decToHex, hexStringToRGB } from "./hex";
+import { absPercentDiff, percentDiff } from "./calc";
+import { decToHex, hexStringToRGB } from "./hexadecimal";
 import { getHSL, hslToHex } from "./hsl";
 
 export interface MirrorSet {
@@ -10,7 +10,8 @@ export interface MirrorSet {
   mirror_hSL: string;
   mirror_hSl: string;
   mirror_hsL: string;
-  mirror_hsl: string;
+  mirror_gsheet: string;
+  mirror_midpoint: string;
 }
 
 // Average Absolute Diff - Google Sheets dark vs light
@@ -56,7 +57,6 @@ export const getMirrorSet = ({
   const satComp = 1 - sat;
   const lumComp = 1 - lum;
 
-  console.log(getPercentDiffComp(hex));
   return {
     mirror_HSL: hslToHex({ hue: hueComp, sat: satComp, lum: lumComp }),
     mirror_HSl: hslToHex({ hue: hueComp, sat: satComp, lum }),
@@ -65,20 +65,31 @@ export const getMirrorSet = ({
     mirror_hSL: hslToHex({ hue, sat: satComp, lum: lumComp }),
     mirror_hSl: hslToHex({ hue, sat: satComp, lum }),
     mirror_hsL: hslToHex({ hue, sat, lum: lumComp }),
-    mirror_hsl: getGSheetsComp(hex), // mirror_hsl -> mirror_gsheet
+    mirror_gsheet: getGSheetsComp(hex),
+    mirror_midpoint: getMidpointComp(hex),
   };
 };
 
-// WIP: percent-diff based complement
 const RGB_MP = 255 / 2;
 const HUE_MP = 360 / 2;
 const SL_MP = 1 / 2;
 
-export const getPercentDiffComp = (hex: string): string => {
+export const getMidpointComp = (hex: string): string => {
   const { red, green, blue } = hexStringToRGB(hex);
-  const rDiff = absPercentDiff(red, RGB_MP);
-  const gDiff = absPercentDiff(green, RGB_MP);
-  const bDiff = absPercentDiff(blue, RGB_MP);
-  console.log(rDiff, gDiff, bDiff);
-  return hex;
+  const rDiff = RGB_MP - red;
+  const gDiff = RGB_MP - green;
+  const bDiff = RGB_MP - blue;
+
+  let rNew: number = RGB_MP,
+    gNew: number = RGB_MP,
+    bNew: number = RGB_MP;
+
+  if (rDiff > RGB_MP) rNew -= rDiff;
+  else rNew += rDiff;
+  if (gDiff > RGB_MP) gNew -= gDiff;
+  else gNew += gDiff;
+  if (bDiff > RGB_MP) bNew -= bDiff;
+  else bNew += bDiff;
+
+  return `${decToHex(rNew)}${decToHex(gNew)}${decToHex(bNew)}`;
 };

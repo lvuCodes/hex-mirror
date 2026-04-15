@@ -1,5 +1,5 @@
-import { decToHex } from "./hex";
-import { randomDecToHex, getComplementValues } from "./dec";
+import { decToHex } from "./hexadecimal";
+import { randomDecToHex, getComplementValues } from "./decimal";
 import { HSLValues, getHSL } from "./hsl";
 import { MirrorSet, getMirrorSet } from "./complement";
 
