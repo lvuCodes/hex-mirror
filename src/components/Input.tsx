@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Classnames from "classnames";
 import { useColorList } from "../hooks";
 import { ChangeEvent, useEffect, useState } from "react";
-import { isHexCode } from "../utils";
+import { isHexCode, hexStringToRGB, calculateHexAttr } from "../utils";
 
 const StyledInput = styled.div`
   width: 90%;
@@ -49,7 +49,7 @@ const Input = () => {
     setIsValid(valid);
 
     if (valid) {
-      updateItem(0, { ...inputItem, hex: stripped });
+      updateItem(0, calculateHexAttr(hexStringToRGB(stripped)));
     }
   }, [inputValue]);
 
