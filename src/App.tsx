@@ -17,3 +17,4 @@ export default function App() {
 // - opacity slider
 // - submit button
 // - hover state to indicate which mirror hex
+// - provide formulas for each calculation
