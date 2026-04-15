@@ -13,8 +13,7 @@ export default function App() {
 
 // TODO
 // - dark mode
-// - copy hex
-// - opacity slider
-// - submit button
-// - hover state to indicate which mirror hex
+// - copy hex - cursor: copy;
+// - opacity slider XOR submit button
+// - hover state (?) to indicate which mirror hex
 // - provide formulas for each calculation
