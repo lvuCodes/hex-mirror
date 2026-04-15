@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useCompareList } from "../hooks";
 import { CompareItem } from "../utils";
-import { format, absPercentDiff } from "../utils";
+import { format, absPercentDiff, populateHexEntry } from "../utils";
 
 // This component is primarily used to determine various calculations
 // It is useful but should not be exposed to the user
@@ -51,6 +51,9 @@ const CompareRow = ({
 const CompareCard = (props: { item: CompareItem }) => {
   const { hexA, hexB } = props.item;
 
+  const hexAFull = populateHexEntry(hexA);
+  const hexBFull = populateHexEntry(hexB);
+
   return (
     <StyledCompareCard>
       <table>
@@ -77,12 +80,12 @@ const CompareCard = (props: { item: CompareItem }) => {
           <th style={{ width: "20%" }}>|diff|</th>
           <th style={{ width: "20%" }}>% diff</th>
         </tr>
-        <CompareRow label="Red" a={hexA.RGB?.red} b={hexB.RGB?.red} />
-        <CompareRow label="Green" a={hexA.RGB?.green} b={hexB.RGB?.green} />
-        <CompareRow label="Blue" a={hexA.RGB?.blue} b={hexB.RGB?.blue} />
-        <CompareRow label="Hue" a={hexA.HSL?.hue} b={hexB.HSL?.hue} />
-        <CompareRow label="Saturation" a={hexA.HSL?.sat} b={hexB.HSL?.sat} />
-        <CompareRow label="Lightness" a={hexA.HSL?.lum} b={hexB.HSL?.lum} />
+        <CompareRow label="Red" a={hexAFull.RGB?.red} b={hexBFull.RGB?.red} />
+        <CompareRow label="Green" a={hexAFull.RGB?.green} b={hexBFull.RGB?.green} />
+        <CompareRow label="Blue" a={hexAFull.RGB?.blue} b={hexBFull.RGB?.blue} />
+        <CompareRow label="Hue" a={hexAFull.HSL?.hue} b={hexBFull.HSL?.hue} />
+        <CompareRow label="Saturation" a={hexAFull.HSL?.sat} b={hexBFull.HSL?.sat} />
+        <CompareRow label="Lightness" a={hexAFull.HSL?.lum} b={hexBFull.HSL?.lum} />
       </table>
     </StyledCompareCard>
   );
