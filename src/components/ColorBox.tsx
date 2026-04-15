@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { MirrorSet } from "../utils";
 
 const StyledColorBox = styled.div`
-  max-width: 90%;
+  max-width: 95%;
   border-radius: 10px;
   margin: 20px auto;
   align-items: baseline;
@@ -20,7 +20,7 @@ const Hex = styled.div`
   border-radius: 10px;
   background-color: white;
   align-content: center;
-  padding: 3px;
+  padding: 2px 4px;
   margin: 5px 15px 5px 5px;
   box-shadow: 2px 2px 2px grey;
   font-weight: normal;
@@ -36,6 +36,18 @@ const poem = [
   "    Of my darling—my darling—my life and my bride,",
   "    In her sepulchre there by the sea—",
   "    In her tomb by the sounding sea.",
+];
+
+const about = [
+  "This one uses the complementary Hue, Saturation, and Lightness.",
+  "This one uses the complementary Hue and Saturation.",
+  "This one uses the complementary Hue and Lightness.",
+  "This one uses the complementary Hue.",
+  "This one uses the complementary Saturation and Lightness.",
+  "This one uses the complementary Saturation.",
+  "This one uses the complementary Lightness.",
+  "This one utilizes estimated hexcode differences through Google Sheets light and dark mode views.",
+  "This one uses the difference between the midpoint of 255 and the RGB value.",
 ];
 
 interface ColorBoxProps {
