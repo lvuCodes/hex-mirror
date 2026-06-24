@@ -1,0 +1,10 @@
+{
+    "id": "sliders-to-inputs",
+    "name": "Sliders to Inputs",
+    "version": "1.0.0",
+    "minAppVersion": "0.15.0",
+    "description": "Replaces slider controls in settings with number input boxes.",
+    "author": "lCodes",
+    "authorUrl": "",
+    "isDesktopOnly": false
+}

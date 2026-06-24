@@ -1,0 +1,100 @@
+/* Headings use interface font */
+.markdown-rendered h1,
+.markdown-rendered h2,
+.markdown-rendered h3,
+.markdown-rendered h4,
+.markdown-rendered h5,
+.markdown-rendered h6,
+.cm-header {
+  font-family: var(--font-interface) !important;
+}
+
+/* Rounded highlights — reading view */
+.markdown-rendered mark {
+  border-radius: 4px !important;
+  padding: 1px 3px !important;
+  background: rgba(255, 175, 50, 0.3) !important;
+}
+
+/* Rounded highlights — live preview */
+.cm-highlight {
+  border-radius: 4px !important;
+  padding: 1px 3px !important;
+  background: rgba(255, 175, 50, 0.3) !important;
+}
+
+/* Rounded tables — reading view */
+.markdown-rendered table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border: 1px solid var(--table-border-color);
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.markdown-rendered table th,
+.markdown-rendered table td {
+  border-top: none;
+  border-left: none;
+  border-right: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+  padding: 4px 2px !important;
+}
+
+.markdown-rendered table th:last-child,
+.markdown-rendered table td:last-child {
+  border-right: none;
+}
+
+.markdown-rendered table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Rounded tables — live preview */
+.cm-table-widget table,
+.cm-embed-block table {
+  border-collapse: separate !important;
+  border-spacing: 0;
+  border: 1px solid var(--table-border-color);
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.cm-table-widget table th,
+.cm-table-widget table td,
+.cm-embed-block table th,
+.cm-embed-block table td {
+  border-top: none;
+  border-left: none;
+  border-right: 1px solid var(--table-border-color);
+  border-bottom: 1px solid var(--table-border-color);
+  padding: 4px 2px !important;
+}
+
+.cm-table-widget table th:last-child,
+.cm-table-widget table td:last-child,
+.cm-embed-block table th:last-child,
+.cm-embed-block table td:last-child {
+  border-right: none;
+}
+
+.cm-table-widget table tr:last-child td,
+.cm-embed-block table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Inline code — reading view */
+.markdown-rendered :not(pre) > code {
+  background: rgba(138, 118, 255, 0.25) !important;
+  border-radius: 4px !important;
+  padding: 2px 5px !important;
+  font-size: 0.9em;
+}
+
+/* Inline code — live preview */
+.cm-inline-code:not(.cm-formatting-code) {
+  background: rgba(138, 118, 255, 0.25) !important;
+  border-radius: 4px !important;
+  padding: 2px 5px !important;
+  font-size: 0.9em;
+}

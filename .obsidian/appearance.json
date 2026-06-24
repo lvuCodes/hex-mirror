@@ -1,0 +1,13 @@
+{
+  "accentColor": "",
+  "monospaceFontFamily": "Latin Modern Mono Caps,Latin Modern Mono,Space Mono,Courier New,Courier",
+  "interfaceFontFamily": "Tsukushi B Round Gothic,Chalkduster,duxiupinyinti,Mengshen",
+  "textFontFamily": "Tsukushi A Round Gothic,Chalkboard,AaXiaoxuebapinyint (Non-Commercial Use),AaJiushiguangpinyint (Non-Commercial Use)",
+  "baseFontSize": 16,
+  "enabledCssSnippets": [
+    "font",
+    "tasks-blocked",
+    "heading-cool-mono",
+    "rounded"
+  ]
+}
