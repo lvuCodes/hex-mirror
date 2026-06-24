@@ -1,0 +1,79 @@
+{
+  "collapse-filter": false,
+  "search": "(tag:#task OR tag:#meeting) -tag:#poc -tag:#archived",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": false,
+  "collapse-color-groups": false,
+  "colorGroups": [
+    {
+      "query": "tag:#task/blocked",
+      "color": {
+        "a": 1,
+        "rgb": 14701138
+      }
+    },
+    {
+      "query": "tag:#task/blocker",
+      "color": {
+        "a": 1,
+        "rgb": 14725458
+      }
+    },
+    {
+      "query": "tag:#task/open",
+      "color": {
+        "a": 1,
+        "rgb": 6654999
+      }
+    },
+    {
+      "query": "tag:#task/completed",
+      "color": {
+        "a": 1,
+        "rgb": 5407200
+      }
+    },
+    {
+      "query": "tag:meeting",
+      "color": {
+        "a": 1,
+        "rgb": 8146410
+      }
+    },
+    {
+      "query": "tag:#task/inactive",
+      "color": {
+        "a": 1,
+        "rgb": 7362391
+      }
+    },
+    {
+      "query": "tag:#task/deferred ",
+      "color": {
+        "a": 1,
+        "rgb": 10251660
+      }
+    },
+    {
+      "query": "tag:#task/p1-dependent",
+      "color": {
+        "a": 1,
+        "rgb": 6749952
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": -3,
+  "nodeSizeMultiplier": 1.65847222222222,
+  "lineSizeMultiplier": 2.30967881944444,
+  "collapse-forces": false,
+  "centerStrength": 0.306770833333333,
+  "repelStrength": 11.9600694444444,
+  "linkStrength": 0.571180555555556,
+  "linkDistance": 30,
+  "scale": 0.3323755479403294,
+  "close": false
+}

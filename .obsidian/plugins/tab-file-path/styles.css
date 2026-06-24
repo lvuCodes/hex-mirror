@@ -1,0 +1,5 @@
+.tab__title {
+  text-overflow: ellipsis;
+  unicode-bidi: normal;
+  direction: rtl;
+}

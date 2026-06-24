@@ -1,0 +1,41 @@
+{
+  "mobileToolbarCommands": [
+    "editor:insert-wikilink",
+    "editor:attach-file",
+    "editor:set-heading",
+    "editor:toggle-bold",
+    "editor:toggle-italics",
+    "editor:toggle-strikethrough",
+    "editor:toggle-highlight",
+    "editor:insert-link",
+    "editor:toggle-bullet-list",
+    "editor:toggle-numbered-list",
+    "editor:toggle-checklist-status",
+    "editor:indent-list",
+    "editor:unindent-list",
+    "editor:undo",
+    "editor:redo",
+    "editor:insert-table",
+    "editor:table-col-before",
+    "editor:table-row-before",
+    "editor:configure-toolbar"
+  ],
+  "readableLineLength": false,
+  "showLineNumber": true,
+  "spellcheck": true,
+  "useTab": false,
+  "pdfExportSettings": {
+    "includeName": true,
+    "pageSize": "Letter",
+    "landscape": false,
+    "margin": "1",
+    "downscalePercent": 90
+  },
+  "newFileLocation": "current",
+  "attachmentFolderPath": "./attachments",
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "focusNewTab": false,
+  "showHiddenFiles": true,
+  "promptDelete": false
+}
