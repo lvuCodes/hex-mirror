@@ -1,0 +1,17 @@
+/* Dim and italicize any task that has a dependsOn field (⛔) */
+li.task-list-item:has(.task-dependsOn) {
+  opacity: 0.45;
+  font-style: italic;
+}
+
+/* Red highlight on the dependency tag itself */
+li.task-list-item .task-dependsOn {
+  color: var(--text-error);
+  font-weight: bold;
+}
+
+/* Highlight the blocker task's ID tag (🆔) */
+li.task-list-item .task-id {
+  color: var(--text-warning);
+  font-weight: bold;
+}

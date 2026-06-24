@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "enableInFullScreen": true,
+  "timeoutSeconds": 10,
+  "resetOnActivity": true,
+  "showVaultSwitcher": true,
+  "showPluginSettings": false,
+  "showObsidianSettings": true,
+  "closeCurrentVaultOnSwitch": false
+}
