@@ -11,7 +11,7 @@
   "tasks": {
     "start": {
       "name": "start",
-      "command": "pnpm start",
+      "command": "pnpm dev",
       "runAtStart": true,
       "preview": {
         "port": 3000
@@ -25,11 +25,6 @@
     "test": {
       "name": "test",
       "command": "pnpm test",
-      "runAtStart": false
-    },
-    "eject": {
-      "name": "eject",
-      "command": "pnpm eject",
       "runAtStart": false
     }
   }
