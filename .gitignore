@@ -5,3 +5,12 @@ node-modules
 pnpm-lock.yaml
 *.log
 node_modules
+dist
+*.tsbuildinfo
+
+# Tooling output / caches
+coverage
+.vite
+vite.config.ts.timestamp-*
+.eslintcache
+*.local
