@@ -1,20 +1,7 @@
-import { decToHex } from "./hexadecimal";
+import { rgbToHexString } from "./hexadecimal";
+import type { RGBChannels, HSLValues } from "./types";
 
-export interface HSLValues {
-  hue: number;
-  sat: number;
-  lum: number;
-}
-
-export const getHSL = ({
-  red,
-  green,
-  blue,
-}: {
-  red: number;
-  green: number;
-  blue: number;
-}): HSLValues => {
+export const getHSL = ({ red, green, blue }: RGBChannels): HSLValues => {
   const rNorm = red / 255;
   const gNorm = green / 255;
   const bNorm = blue / 255;
@@ -45,15 +32,14 @@ export const getHSL = ({
   return { hue, sat, lum };
 };
 
-export const hslToHex = ({
-  hue,
-  sat,
-  lum,
-}: {
-  hue: number;
-  sat: number;
-  lum: number;
-}): string => {
+/** Complement each HSL component around its own range. */
+export const complementHSL = ({ hue, sat, lum }: HSLValues): HSLValues => ({
+  hue: 360 - hue,
+  sat: 1 - sat,
+  lum: 1 - lum,
+});
+
+export const hslToHex = ({ hue, sat, lum }: HSLValues): string => {
   const chroma = (1 - Math.abs(2 * lum - 1)) * sat;
   const secondary = chroma * (1 - Math.abs(((hue / 60) % 2) - 1));
   const offset = lum - chroma / 2;
@@ -81,9 +67,9 @@ export const hslToHex = ({
     blue = secondary;
   }
 
-  const R = decToHex(Math.round((red + offset) * 255));
-  const G = decToHex(Math.round((green + offset) * 255));
-  const B = decToHex(Math.round((blue + offset) * 255));
-
-  return `${R}${G}${B}`;
+  return rgbToHexString({
+    red: Math.round((red + offset) * 255),
+    green: Math.round((green + offset) * 255),
+    blue: Math.round((blue + offset) * 255),
+  });
 };
