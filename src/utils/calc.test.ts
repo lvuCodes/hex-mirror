@@ -6,6 +6,10 @@ describe("arrayAvg", () => {
     expect(arrayAvg([1, 2, 3])).toBe(2);
     expect(arrayAvg([10])).toBe(10);
   });
+
+  it("returns 0 for an empty list instead of NaN", () => {
+    expect(arrayAvg([])).toBe(0);
+  });
 });
 
 describe("percentDiff / absPercentDiff", () => {
@@ -28,5 +32,10 @@ describe("format", () => {
   it("truncates to six characters", () => {
     expect(format(3.1415926)).toBe("3.1415");
     expect(format(255)).toBe("255");
+  });
+
+  it("renders non-finite values as '0'", () => {
+    expect(format(NaN)).toBe("0");
+    expect(format(Infinity)).toBe("0");
   });
 });

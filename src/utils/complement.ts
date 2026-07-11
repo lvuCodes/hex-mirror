@@ -1,17 +1,14 @@
-import { decToHex, hexStringToRGB } from "./hexadecimal";
-import { getHSL, hslToHex } from "./hsl";
+import { decToHex, hexStringToRGB, rgbToHexString } from "./hexadecimal";
+import { getHSL, hslToHex, complementHSL } from "./hsl";
+import type { HSLValues, MirrorSet } from "./types";
 
-export interface MirrorSet {
-  mirror_HSL: string;
-  mirror_HSl: string;
-  mirror_HsL: string;
-  mirror_Hsl: string;
-  mirror_hSL: string;
-  mirror_hSl: string;
-  mirror_hsL: string;
-  mirror_gsheet: string;
-  mirror_midpoint: string;
-}
+/** The 0–255 complement of a single channel, with its hex form. */
+export const getComplementValues = (
+  num: number
+): { dec: number; hex: string } => ({
+  dec: 255 - num,
+  hex: decToHex(255 - num),
+});
 
 // Average Absolute Diff - Google Sheets dark vs light
 // (calculated by avgHex)
@@ -24,37 +21,36 @@ export interface MirrorSet {
 // Lightness    0.4509    0.4511    0.0001    0.0003
 
 const RGB_CHANGE = 113 + Math.round(Math.random() * 4);
+const RGB_MIDPOINT = 255 / 2;
 
 const clampChannel = (n: number): number => Math.max(0, Math.min(255, n));
 
-const clampedValue = (num: number, delta: number): string => {
-  return decToHex(clampChannel(num + delta));
-};
-
 export const getGSheetsComp = (hex: string): string => {
-  const rgb = hexStringToRGB(hex);
-  const { lum } = getHSL(rgb);
+  const { red, green, blue } = hexStringToRGB(hex);
+  const { lum } = getHSL({ red, green, blue });
   const delta = lum < 0.5 ? RGB_CHANGE : -RGB_CHANGE;
-  const clampedRed = clampedValue(rgb.red, delta);
-  const clampedGreen = clampedValue(rgb.green, delta);
-  const clampedBlue = clampedValue(rgb.blue, delta);
-
-  return `${clampedRed}${clampedGreen}${clampedBlue}`;
+  return rgbToHexString({
+    red: clampChannel(red + delta),
+    green: clampChannel(green + delta),
+    blue: clampChannel(blue + delta),
+  });
 };
 
-export const getMirrorSet = ({
-  hue,
-  sat,
-  lum,
-}: {
-  hue: number;
-  sat: number;
-  lum: number;
-}): MirrorSet => {
-  const hex = hslToHex({ hue, sat, lum });
-  const hueComp = 360 - hue;
-  const satComp = 1 - sat;
-  const lumComp = 1 - lum;
+/** Reflect each RGB channel across the 0–255 midpoint (equivalent to 255 − v). */
+export const getMidpointComp = (hex: string): string => {
+  const { red, green, blue } = hexStringToRGB(hex);
+  const reflect = (v: number): number => 2 * RGB_MIDPOINT - v;
+  return rgbToHexString({
+    red: reflect(red),
+    green: reflect(green),
+    blue: reflect(blue),
+  });
+};
+
+export const getMirrorSet = (hsl: HSLValues): MirrorSet => {
+  const { hue, sat, lum } = hsl;
+  const { hue: hueComp, sat: satComp, lum: lumComp } = complementHSL(hsl);
+  const hex = hslToHex(hsl);
 
   return {
     mirror_HSL: hslToHex({ hue: hueComp, sat: satComp, lum: lumComp }),
@@ -67,28 +63,4 @@ export const getMirrorSet = ({
     mirror_gsheet: getGSheetsComp(hex),
     mirror_midpoint: getMidpointComp(hex),
   };
-};
-
-const RGB_MP = 255 / 2;
-const HUE_MP = 360 / 2;
-const SL_MP = 1 / 2;
-
-export const getMidpointComp = (hex: string): string => {
-  const { red, green, blue } = hexStringToRGB(hex);
-  const rDiff = RGB_MP - red;
-  const gDiff = RGB_MP - green;
-  const bDiff = RGB_MP - blue;
-
-  let rNew: number = RGB_MP,
-    gNew: number = RGB_MP,
-    bNew: number = RGB_MP;
-
-  if (rDiff > RGB_MP) rNew -= rDiff;
-  else rNew += rDiff;
-  if (gDiff > RGB_MP) gNew -= gDiff;
-  else gNew += gDiff;
-  if (bDiff > RGB_MP) bNew -= bDiff;
-  else bNew += bDiff;
-
-  return `${decToHex(rNew)}${decToHex(gNew)}${decToHex(bNew)}`;
 };

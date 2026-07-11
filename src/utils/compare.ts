@@ -1,92 +1,50 @@
-import { decToHex, hexStringToRGB } from "./hexadecimal";
+import { hexStringToRGB, rgbToHexString, toRGBValues } from "./hexadecimal";
 import { getHSL, hslToHex } from "./hsl";
-import { RGBValues } from "./rgb";
-import { HSLValues } from "./hsl";
-import { arrayAvg, absPercentDiff } from "./calc";
+import { arrayAvg } from "./calc";
+import type { HexEntry, CompareItem } from "./types";
 
-export interface HexEntry {
-  hex: string;
-  RGB?: RGBValues;
-  HSL?: HSLValues;
-}
+/** Mean of the absolute per-pair difference of one picked metric, ignoring identical pairs. */
+const avgAbsDiff = (
+  list: CompareItem[],
+  pick: (entry: HexEntry) => number
+): number => {
+  const diffs = list
+    .filter(({ hexA, hexB }) => hexA.hex !== hexB.hex)
+    .map(({ hexA, hexB }) => Math.abs(pick(hexA) - pick(hexB)));
+  return arrayAvg(diffs);
+};
 
-export interface CompareItem {
-  hexA: HexEntry;
-  hexB: HexEntry;
-}
+const rgbPick =
+  (key: "red" | "green" | "blue") =>
+  (entry: HexEntry): number =>
+    entry.RGB?.[key] ?? 0;
+const hslPick =
+  (key: "hue" | "sat" | "lum") =>
+  (entry: HexEntry): number =>
+    entry.HSL?.[key] ?? 0;
 
 const avgHex = (list: CompareItem[]): CompareItem => {
-  const redDiffs: number[] = [],
-    greenDiffs: number[] = [],
-    blueDiffs: number[] = [],
-    hueDiffs: number[] = [],
-    satDiffs: number[] = [],
-    lumDiffs: number[] = [],
-    redPercents: number[] = [],
-    greenPercents: number[] = [],
-    bluePercents: number[] = [],
-    huePercents: number[] = [],
-    satPercents: number[] = [],
-    lumPercents: number[] = [];
+  const redAvg = Math.round(avgAbsDiff(list, rgbPick("red")));
+  const greenAvg = Math.round(avgAbsDiff(list, rgbPick("green")));
+  const blueAvg = Math.round(avgAbsDiff(list, rgbPick("blue")));
+  const hueAvg = avgAbsDiff(list, hslPick("hue"));
+  const satAvg = avgAbsDiff(list, hslPick("sat"));
+  const lumAvg = avgAbsDiff(list, hslPick("lum"));
 
-  list.forEach(({ hexA, hexB }) => {
-    if (hexA.hex === hexB.hex) return;
-
-    const rA = hexA.RGB?.red ?? 0,
-      rB = hexB.RGB?.red ?? 0;
-    const gA = hexA.RGB?.green ?? 0,
-      gB = hexB.RGB?.green ?? 0;
-    const bA = hexA.RGB?.blue ?? 0,
-      bB = hexB.RGB?.blue ?? 0;
-    const hA = hexA.HSL?.hue ?? 0,
-      hB = hexB.HSL?.hue ?? 0;
-    const sA = hexA.HSL?.sat ?? 0,
-      sB = hexB.HSL?.sat ?? 0;
-    const lA = hexA.HSL?.lum ?? 0,
-      lB = hexB.HSL?.lum ?? 0;
-
-    redDiffs.push(Math.abs(rA - rB));
-    greenDiffs.push(Math.abs(gA - gB));
-    blueDiffs.push(Math.abs(bA - bB));
-    hueDiffs.push(Math.abs(hA - hB));
-    satDiffs.push(Math.abs(sA - sB));
-    lumDiffs.push(Math.abs(lA - lB));
-
-    redPercents.push(absPercentDiff(rA, rB));
-    greenPercents.push(absPercentDiff(gA, gB));
-    bluePercents.push(absPercentDiff(bA, bB));
-    huePercents.push(absPercentDiff(hA, hB));
-    satPercents.push(absPercentDiff(sA, sB));
-    lumPercents.push(absPercentDiff(lA, lB));
-  });
-
-  const redAvg = Math.round(arrayAvg(redDiffs));
-  const greenAvg = Math.round(arrayAvg(greenDiffs));
-  const blueAvg = Math.round(arrayAvg(blueDiffs));
-  const hueAvg = arrayAvg(hueDiffs);
-  const satAvg = arrayAvg(satDiffs);
-  const lumAvg = arrayAvg(lumDiffs);
-
-  // console.log("redPercDiffAvg:", arrayAvg(redPercents));
-  // console.log("greenPercDiffAvg:", arrayAvg(greenPercents));
-  // console.log("bluePercDiffAvg:", arrayAvg(bluePercents));
-  // console.log("huePercDiffAvg:", arrayAvg(huePercents));
-  // console.log("satPercDiffAvg:", arrayAvg(satPercents));
-  // console.log("lumPercDiffAvg:", arrayAvg(lumPercents));
-
-  const hexBStr = hslToHex({ hue: hueAvg, sat: satAvg, lum: lumAvg });
-  const hexBRGB = hexStringToRGB(hexBStr);
+  const rgbAvg = { red: redAvg, green: greenAvg, blue: blueAvg };
+  const hslAvg = { hue: hueAvg, sat: satAvg, lum: lumAvg };
+  const hexBStr = hslToHex(hslAvg);
 
   return {
     hexA: {
-      hex: `${decToHex(redAvg)}${decToHex(greenAvg)}${decToHex(blueAvg)}`,
-      RGB: { red: redAvg, green: greenAvg, blue: blueAvg },
-      HSL: getHSL({ red: redAvg, green: greenAvg, blue: blueAvg }),
+      hex: rgbToHexString(rgbAvg),
+      RGB: toRGBValues(rgbAvg),
+      HSL: getHSL(rgbAvg),
     },
     hexB: {
       hex: hexBStr,
-      RGB: hexBRGB,
-      HSL: { hue: hueAvg, sat: satAvg, lum: lumAvg },
+      RGB: toRGBValues(hexStringToRGB(hexBStr)),
+      HSL: hslAvg,
     },
   };
 };
@@ -95,7 +53,7 @@ export const populateHexEntry = (entry: HexEntry): HexEntry => {
   const rgb = hexStringToRGB(entry.hex);
   return {
     hex: entry.hex,
-    RGB: { ...rgb, R: decToHex(rgb.red), G: decToHex(rgb.green), B: decToHex(rgb.blue) },
+    RGB: toRGBValues(rgb),
     HSL: getHSL(rgb),
   };
 };

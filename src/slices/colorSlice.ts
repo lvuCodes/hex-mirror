@@ -6,15 +6,12 @@ export interface ColorList {
   items: ColorCard[];
 }
 
-// export const initialState: ColorList = { items: [] };
-// randomized input item
-const randomHex = getRandomHex();
+// Seed the input card with a random color.
 const {
   RGB: { red, green, blue },
-} = randomHex;
-const inputAttr = calculateHexAttr({ red, green, blue });
+} = getRandomHex();
 export const initialState: ColorList = {
-  items: [inputAttr],
+  items: [calculateHexAttr({ red, green, blue })],
 };
 
 const colorListSlice = createSlice({

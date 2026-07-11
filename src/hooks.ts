@@ -18,7 +18,6 @@ export function useColorList() {
 }
 
 export function useCompareList() {
-  const dispatch = useDispatch<AppDispatch>();
   const items = useSelector(selectList);
 
   return {

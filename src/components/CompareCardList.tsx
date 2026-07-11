@@ -19,8 +19,8 @@ const CompareCardList = () => {
 
   return (
     <>
-      {items.map((item) => (
-        <CompareCard item={item} />
+      {items.map((item, i) => (
+        <CompareCard key={i} item={item} />
       ))}
     </>
   );
@@ -48,8 +48,8 @@ const CompareRow = ({
   );
 };
 
-const CompareCard = (props: { item: CompareItem }) => {
-  const { hexA, hexB } = props.item;
+const CompareCard = ({ item }: { item: CompareItem }) => {
+  const { hexA, hexB } = item;
 
   const hexAFull = populateHexEntry(hexA);
   const hexBFull = populateHexEntry(hexB);
@@ -57,35 +57,53 @@ const CompareCard = (props: { item: CompareItem }) => {
   return (
     <StyledCompareCard>
       <table>
-        <tr>
-          <th style={{ width: "20%" }}></th>
-          <th
-            style={{
-              width: "20%",
-              backgroundColor: `#${hexA.hex}`,
-              color: `#${hexB.hex}`,
-            }}
-          >
-            {hexA.hex}
-          </th>
-          <th
-            style={{
-              width: "20%",
-              backgroundColor: `#${hexB.hex}`,
-              color: `#${hexA.hex}`,
-            }}
-          >
-            {hexB.hex}
-          </th>
-          <th style={{ width: "20%" }}>|diff|</th>
-          <th style={{ width: "20%" }}>% diff</th>
-        </tr>
-        <CompareRow label="Red" a={hexAFull.RGB?.red} b={hexBFull.RGB?.red} />
-        <CompareRow label="Green" a={hexAFull.RGB?.green} b={hexBFull.RGB?.green} />
-        <CompareRow label="Blue" a={hexAFull.RGB?.blue} b={hexBFull.RGB?.blue} />
-        <CompareRow label="Hue" a={hexAFull.HSL?.hue} b={hexBFull.HSL?.hue} />
-        <CompareRow label="Saturation" a={hexAFull.HSL?.sat} b={hexBFull.HSL?.sat} />
-        <CompareRow label="Lightness" a={hexAFull.HSL?.lum} b={hexBFull.HSL?.lum} />
+        <tbody>
+          <tr>
+            <th style={{ width: "20%" }}></th>
+            <th
+              style={{
+                width: "20%",
+                backgroundColor: `#${hexA.hex}`,
+                color: `#${hexB.hex}`,
+              }}
+            >
+              {hexA.hex}
+            </th>
+            <th
+              style={{
+                width: "20%",
+                backgroundColor: `#${hexB.hex}`,
+                color: `#${hexA.hex}`,
+              }}
+            >
+              {hexB.hex}
+            </th>
+            <th style={{ width: "20%" }}>|diff|</th>
+            <th style={{ width: "20%" }}>% diff</th>
+          </tr>
+          <CompareRow label="Red" a={hexAFull.RGB?.red} b={hexBFull.RGB?.red} />
+          <CompareRow
+            label="Green"
+            a={hexAFull.RGB?.green}
+            b={hexBFull.RGB?.green}
+          />
+          <CompareRow
+            label="Blue"
+            a={hexAFull.RGB?.blue}
+            b={hexBFull.RGB?.blue}
+          />
+          <CompareRow label="Hue" a={hexAFull.HSL?.hue} b={hexBFull.HSL?.hue} />
+          <CompareRow
+            label="Saturation"
+            a={hexAFull.HSL?.sat}
+            b={hexBFull.HSL?.sat}
+          />
+          <CompareRow
+            label="Lightness"
+            a={hexAFull.HSL?.lum}
+            b={hexBFull.HSL?.lum}
+          />
+        </tbody>
       </table>
     </StyledCompareCard>
   );
