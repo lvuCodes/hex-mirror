@@ -44,6 +44,14 @@ Then open **http://localhost:3000**. The app loads with a random hex color on st
 | `npm run lint` | Lint the project with ESLint. |
 | `npm run format` | Format the project with Prettier. |
 
+## Deployment
+
+The app is deployed to **GitHub Pages** at **https://lvuCodes.github.io/hex-mirror/**.
+
+Deployment is automated by [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml): every push to `main` builds the app and publishes `dist/` to Pages. The production build sets Vite's `base` to `/hex-mirror/` to match the project-site URL (the dev server continues to serve from `/`).
+
+**One-time setup:** in the repository, go to **Settings → Pages → Build and deployment** and set **Source** to **GitHub Actions**. After that, each push to `main` redeploys automatically.
+
 ## Project Structure
 
 ```
