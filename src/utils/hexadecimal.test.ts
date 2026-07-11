@@ -33,6 +33,11 @@ describe("hexStringToRGB", () => {
       blue: 255,
     });
   });
+
+  it("expands 3-digit shorthand the same as its 6-digit form", () => {
+    expect(hexStringToRGB("abc")).toEqual(hexStringToRGB("aabbcc"));
+    expect(hexStringToRGB("F00")).toEqual({ red: 255, green: 0, blue: 0 });
+  });
 });
 
 describe("isHexCode", () => {

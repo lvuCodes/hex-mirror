@@ -1,16 +1,8 @@
 import { decToHex } from "./hexadecimal";
 
-export const getRandom256 = (): number => Math.floor(Math.random() * 255);
+export const getRandom256 = (): number => Math.floor(Math.random() * 256);
 
 export const randomDecToHex = (): { dec: number; hex: string } => {
   const dec = getRandom256();
   return { dec, hex: decToHex(dec) };
 };
-
-export const getComplementValues = (
-  // move this to complement
-  num: number
-): { dec: number; hex: string } => ({
-  dec: 255 - num,
-  hex: decToHex(255 - num),
-});
