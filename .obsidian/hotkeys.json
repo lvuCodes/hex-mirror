@@ -2,41 +2,31 @@
   "file-explorer:new-file": [],
   "daily-notes": [
     {
-      "modifiers": [
-        "Mod"
-      ],
+      "modifiers": ["Mod"],
       "key": "N"
     }
   ],
   "workspace:export-pdf": [
     {
-      "modifiers": [
-        "Mod"
-      ],
+      "modifiers": ["Mod"],
       "key": "P"
     }
   ],
   "command-palette:open": [
     {
-      "modifiers": [
-        "Ctrl"
-      ],
+      "modifiers": ["Ctrl"],
       "key": "P"
     }
   ],
   "editor:fold-all": [
     {
-      "modifiers": [
-        "Ctrl"
-      ],
+      "modifiers": ["Ctrl"],
       "key": "J"
     }
   ],
   "editor:unfold-all": [
     {
-      "modifiers": [
-        "Ctrl"
-      ],
+      "modifiers": ["Ctrl"],
       "key": "K"
     }
   ]
