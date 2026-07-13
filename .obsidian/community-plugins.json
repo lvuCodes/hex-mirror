@@ -3,5 +3,8 @@
   "status-bar-clock",
   "sliders-to-inputs",
   "settings-highlighter",
-  "today-folder-highlight"
+  "today-folder-highlight",
+  "tab-file-path",
+  "open-tab-settings",
+  "xlsx-viewer"
 ]

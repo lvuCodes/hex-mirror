@@ -1,10 +1,10 @@
 {
-    "id": "sidebar-auto-collapse",
-    "name": "Sidebar Auto-Collapse",
-    "version": "1.0.0",
-    "minAppVersion": "0.15.0",
-    "description": "Automatically collapses the left sidebar after a configurable period of inactivity.",
-    "author": "lCodes",
-    "authorUrl": "",
-    "isDesktopOnly": false
+  "id": "sidebar-auto-collapse",
+  "name": "Sidebar Auto-Collapse",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Automatically collapses the left sidebar after a configurable period of inactivity.",
+  "author": "lCodes",
+  "authorUrl": "",
+  "isDesktopOnly": false
 }

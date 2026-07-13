@@ -1,9 +1,9 @@
 {
-	"id": "today-folder-highlight",
-	"name": "Today Folder Highlight",
-	"version": "1.0.0",
-	"minAppVersion": "1.0.0",
-	"description": "Highlights the folder matching today's date (MM-DD format) in the file explorer.",
-	"author": "nllv",
-	"isDesktopOnly": false
+  "id": "today-folder-highlight",
+  "name": "Today Folder Highlight",
+  "version": "1.0.0",
+  "minAppVersion": "1.0.0",
+  "description": "Highlights the folder matching today's date (MM-DD format) in the file explorer.",
+  "author": "nllv",
+  "isDesktopOnly": false
 }
