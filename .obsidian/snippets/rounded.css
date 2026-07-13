@@ -39,6 +39,7 @@
   border-right: 1px solid var(--table-border-color);
   border-bottom: 1px solid var(--table-border-color);
   padding: 4px 2px !important;
+  vertical-align: middle !important;
 }
 
 .markdown-rendered table th:last-child,
@@ -69,6 +70,7 @@
   border-right: 1px solid var(--table-border-color);
   border-bottom: 1px solid var(--table-border-color);
   padding: 4px 2px !important;
+  vertical-align: middle !important;
 }
 
 .cm-table-widget table th:last-child,
@@ -81,6 +83,21 @@
 .cm-table-widget table tr:last-child td,
 .cm-embed-block table tr:last-child td {
   border-bottom: none;
+}
+
+/* Vertically center cell content — reading view (override theme variable) */
+.markdown-rendered {
+  --table-cell-vertical-alignment: middle;
+}
+
+/* Vertically center cell content — live preview.
+   Obsidian core sets .table-cell-wrapper to height:100%, so it fills the whole
+   cell and leaves no slack for the <td>'s vertical-align:middle (set above) to
+   act on. Letting the wrapper shrink to its content restores normal table-cell
+   centering. Do NOT flex the wrapper — it is CodeMirror's editable surface, and
+   changing its display breaks line layout and cursor placement. */
+.markdown-source-view.mod-cm6 .cm-table-widget .table-cell-wrapper {
+  height: auto !important;
 }
 
 /* Inline code — reading view */

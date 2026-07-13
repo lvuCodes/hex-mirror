@@ -175,13 +175,26 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
+      "status-bar-clock:Add timer": false,
+      "status-bar-clock:View active timers": false,
+      "status-bar-clock:View alarms": false,
+      "status-bar-clock:Add alarm": false,
+      "status-bar-clock:Status Bar Clock settings": false,
+      "switcher:Open quick switcher": true,
       "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "canvas:Create new canvas": true,
+      "daily-notes:Open today's daily note": true,
+      "templates:Insert template": true,
+      "command-palette:Open command palette": true,
+      "audio-recorder:Start/stop recording": false,
+      "workspaces:Manage workspace layouts": true,
+      "bases:Create new base": true,
+      "sidebar-auto-collapse:Switch vault": false,
+      "sidebar-auto-collapse:Sidebar Auto-Collapse settings": false,
+      "sidebar-auto-collapse:Open settings": false,
+      "settings-highlighter:Community plugins": false,
+      "settings-highlighter:Core plugins": false,
+      "settings-highlighter:Settings Highlighter settings": false
     }
   },
   "active": "11d7167e5dde8cb6",
