@@ -33,16 +33,16 @@ Then open **http://localhost:3000**. The app loads with a random hex color on st
 
 ## Available Scripts
 
-| Script | Description |
-|---|---|
-| `npm run dev` | Start the Vite dev server on port 3000 with hot reload. |
-| `npm run build` | Type-check (`tsc --noEmit`) and produce a production build in `dist/`. |
-| `npm run preview` | Serve the production build locally on port 3000. |
-| `npm test` | Run the Vitest suite once. |
-| `npm run test:watch` | Run Vitest in watch mode. |
-| `npm run typecheck` | Type-check without emitting output. |
-| `npm run lint` | Lint the project with ESLint. |
-| `npm run format` | Format the project with Prettier. |
+| Script               | Description                                                            |
+| -------------------- | ---------------------------------------------------------------------- |
+| `npm run dev`        | Start the Vite dev server on port 3000 with hot reload.                |
+| `npm run build`      | Type-check (`tsc --noEmit`) and produce a production build in `dist/`. |
+| `npm run preview`    | Serve the production build locally on port 3000.                       |
+| `npm test`           | Run the Vitest suite once.                                             |
+| `npm run test:watch` | Run Vitest in watch mode.                                              |
+| `npm run typecheck`  | Type-check without emitting output.                                    |
+| `npm run lint`       | Lint the project with ESLint.                                          |
+| `npm run format`     | Format the project with Prettier.                                      |
 
 ## Deployment
 

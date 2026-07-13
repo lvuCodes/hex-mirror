@@ -51,11 +51,11 @@ Every color is a point somewhere in that cube. The complement operations below a
 
 RGB is great for machines but a bit awkward for humans. HSL remaps the same colors onto a cylinder, which maps better to how we actually think about color:
 
-| Component | Range | What it controls |
-|-----------|-------|---------|
-| **Hue** $H$ | $[0°, 360°)$ | The "color" — your position on the color wheel ($0°$ = red, $120°$ = green, $240°$ = blue) |
-| **Saturation** $S$ | $[0, 1]$ | How vivid — $0$ is gray, $1$ is full color |
-| **Lightness** $L$ | $[0, 1]$ | How bright — $0$ is black, $0.5$ is the pure hue, $1$ is white |
+| Component          | Range        | What it controls                                                                           |
+| ------------------ | ------------ | ------------------------------------------------------------------------------------------ |
+| **Hue** $H$        | $[0°, 360°)$ | The "color" — your position on the color wheel ($0°$ = red, $120°$ = green, $240°$ = blue) |
+| **Saturation** $S$ | $[0, 1]$     | How vivid — $0$ is gray, $1$ is full color                                                 |
+| **Lightness** $L$  | $[0, 1]$     | How bright — $0$ is black, $0.5$ is the pure hue, $1$ is white                             |
 
 Think of it this way: hue is the **angle** around the cylinder, saturation is the **distance from the center**, and lightness is the **height**. Taking a complement in this space is just reflecting across one or more of those axes.
 
@@ -65,11 +65,11 @@ Think of it this way: hue is the **angle** around the cylinder, saturation is th
 
 All the mirror variants below are built from three base complement values:
 
-| Component | Original | Complement |
-|-----------|----------|------------|
-| Hue | $H$ | $H' = 360 - H$ |
-| Saturation | $S$ | $S' = 1 - S$ |
-| Lightness | $L$ | $L' = 1 - L$ |
+| Component  | Original | Complement     |
+| ---------- | -------- | -------------- |
+| Hue        | $H$      | $H' = 360 - H$ |
+| Saturation | $S$      | $S' = 1 - S$   |
+| Lightness  | $L$      | $L' = 1 - L$   |
 
 Quick note on $H' = 360 - H$: this reflects the hue across the $0°/360°$ boundary on the color wheel. It's not the same as $H + 180°$, which would give you the color directly opposite — these are two different ideas of "opposite hue."
 
@@ -79,15 +79,15 @@ Quick note on $H' = 360 - H$: this reflects the hue across the $0°/360°$ bound
 
 `getMirrorSet` generates all 7 combinations of swapping original vs. complement values across H, S, and L. The naming convention: **uppercase = use the complement**, lowercase = keep the original.
 
-| Key | Hue | Saturation | Lightness | Formula |
-|-----|-----|------------|-----------|---------|
-| `mirror_HSL` | $H'$ | $S'$ | $L'$ | $(360-H,\ 1-S,\ 1-L)$ |
-| `mirror_HSl` | $H'$ | $S'$ | $L$  | $(360-H,\ 1-S,\ L)$ |
-| `mirror_HsL` | $H'$ | $S$  | $L'$ | $(360-H,\ S,\ 1-L)$ |
-| `mirror_Hsl` | $H'$ | $S$  | $L$  | $(360-H,\ S,\ L)$ |
-| `mirror_hSL` | $H$  | $S'$ | $L'$ | $(H,\ 1-S,\ 1-L)$ |
-| `mirror_hSl` | $H$  | $S'$ | $L$  | $(H,\ 1-S,\ L)$ |
-| `mirror_hsL` | $H$  | $S$  | $L'$ | $(H,\ S,\ 1-L)$ |
+| Key          | Hue  | Saturation | Lightness | Formula               |
+| ------------ | ---- | ---------- | --------- | --------------------- |
+| `mirror_HSL` | $H'$ | $S'$       | $L'$      | $(360-H,\ 1-S,\ 1-L)$ |
+| `mirror_HSl` | $H'$ | $S'$       | $L$       | $(360-H,\ 1-S,\ L)$   |
+| `mirror_HsL` | $H'$ | $S$        | $L'$      | $(360-H,\ S,\ 1-L)$   |
+| `mirror_Hsl` | $H'$ | $S$        | $L$       | $(360-H,\ S,\ L)$     |
+| `mirror_hSL` | $H$  | $S'$       | $L'$      | $(H,\ 1-S,\ 1-L)$     |
+| `mirror_hSl` | $H$  | $S'$       | $L$       | $(H,\ 1-S,\ L)$       |
+| `mirror_hsL` | $H$  | $S$        | $L'$      | $(H,\ S,\ 1-L)$       |
 
 ---
 
@@ -135,14 +135,14 @@ Geometrically, this is a point reflection through the center of the RGB cube —
 
 ## Summary
 
-| Variant | Color Space | Operation |
-|---------|-------------|-----------|
-| `mirror_Hsl` | HSL | Hue reflected across $0°$ |
-| `mirror_hSl` | HSL | Saturation inverted |
-| `mirror_hsL` | HSL | Lightness inverted |
-| `mirror_HSl` | HSL | Hue + Saturation reflected/inverted |
-| `mirror_HsL` | HSL | Hue + Lightness reflected/inverted |
-| `mirror_hSL` | HSL | Saturation + Lightness inverted |
-| `mirror_HSL` | HSL | All three channels reflected/inverted |
-| `mirror_gsheet` | RGB | Uniform $\pm K$ shift based on luminance |
-| `mirror_midpoint` | RGB | Point reflection through $(127.5,\ 127.5,\ 127.5)$ |
+| Variant           | Color Space | Operation                                          |
+| ----------------- | ----------- | -------------------------------------------------- |
+| `mirror_Hsl`      | HSL         | Hue reflected across $0°$                          |
+| `mirror_hSl`      | HSL         | Saturation inverted                                |
+| `mirror_hsL`      | HSL         | Lightness inverted                                 |
+| `mirror_HSl`      | HSL         | Hue + Saturation reflected/inverted                |
+| `mirror_HsL`      | HSL         | Hue + Lightness reflected/inverted                 |
+| `mirror_hSL`      | HSL         | Saturation + Lightness inverted                    |
+| `mirror_HSL`      | HSL         | All three channels reflected/inverted              |
+| `mirror_gsheet`   | RGB         | Uniform $\pm K$ shift based on luminance           |
+| `mirror_midpoint` | RGB         | Point reflection through $(127.5,\ 127.5,\ 127.5)$ |

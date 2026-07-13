@@ -39,11 +39,11 @@ $$
 \text{ratio} = \frac{L_1 + 0.05}{L_2 + 0.05}
 $$
 
-| Threshold | Requirement |
-|---|---|
-| 3:1 | WCAG AA, large text |
-| 4.5:1 | WCAG AA, normal text |
-| 7:1 | WCAG AAA, normal text |
+| Threshold | Requirement           |
+| --------- | --------------------- |
+| 3:1       | WCAG AA, large text   |
+| 4.5:1     | WCAG AA, normal text  |
+| 7:1       | WCAG AAA, normal text |
 
 ---
 
@@ -152,11 +152,11 @@ $$
 \Delta E = \sqrt{(\Delta L^*)^2 + (\Delta a^*)^2 + (\Delta b^*)^2}
 $$
 
-| $\Delta E$ | Perception |
-|---|---|
-| $< 1$ | Imperceptible |
-| $1$–$2$ | Perceptible on close inspection |
-| $2$–$10$ | Perceptible at a glance |
-| $> 50$ | Colors are more different than similar |
+| $\Delta E$ | Perception                             |
+| ---------- | -------------------------------------- |
+| $< 1$      | Imperceptible                          |
+| $1$–$2$    | Perceptible on close inspection        |
+| $2$–$10$   | Perceptible at a glance                |
+| $> 50$     | Colors are more different than similar |
 
 Improved versions: **CIE94**, **CIEDE2000** (most perceptually accurate). HSL is not perceptually uniform and should not be used for $\Delta E$ calculations.

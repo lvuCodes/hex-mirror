@@ -17,11 +17,11 @@ $$
 
 **Variables**
 
-| Symbol | Name | Type/Range |
-|---|---|---|
-| $c$ | Raw channel value | integer, 0–255 |
-| $c_{\text{sRGB}}$ | Normalized channel | float, 0–1 |
-| $c_{\text{linear}}$ | Gamma-expanded channel | float, 0–1 |
+| Symbol              | Name                   | Type/Range     |
+| ------------------- | ---------------------- | -------------- |
+| $c$                 | Raw channel value      | integer, 0–255 |
+| $c_{\text{sRGB}}$   | Normalized channel     | float, 0–1     |
+| $c_{\text{linear}}$ | Gamma-expanded channel | float, 0–1     |
 
 **Pseudocode**
 
@@ -41,6 +41,7 @@ B_linear = toLinear(B)
 ```
 
 **Gotchas**
+
 - Apply to each channel independently
 - Input is 0–255 integer; output is 0–1 float
 - Use `** 2.4` for exponentiation (`Math.pow(x, 2.4)` in JS)
@@ -55,12 +56,12 @@ $$
 
 **Variables**
 
-| Symbol | Name | Type/Range |
-|---|---|---|
-| $L$ | Relative luminance | float, 0–1 |
-| $R_{\text{linear}}$ | Linear red channel | float, 0–1 |
+| Symbol              | Name                 | Type/Range |
+| ------------------- | -------------------- | ---------- |
+| $L$                 | Relative luminance   | float, 0–1 |
+| $R_{\text{linear}}$ | Linear red channel   | float, 0–1 |
 | $G_{\text{linear}}$ | Linear green channel | float, 0–1 |
-| $B_{\text{linear}}$ | Linear blue channel | float, 0–1 |
+| $B_{\text{linear}}$ | Linear blue channel  | float, 0–1 |
 
 **Pseudocode**
 
@@ -71,6 +72,7 @@ function getLuminance(R: number, G: number, B: number): number {
 ```
 
 **Gotchas**
+
 - Use linear RGB, not raw 0–255 values
 - Coefficients are fixed WCAG constants — do not change them
 
@@ -84,11 +86,11 @@ $$
 
 **Variables**
 
-| Symbol | Name | Type/Range |
-|---|---|---|
-| $L_1$ | Luminance of lighter color | float, 0–1 |
-| $L_2$ | Luminance of darker color | float, 0–1 |
-| $\text{ratio}$ | Contrast ratio | float, 1–21 |
+| Symbol         | Name                       | Type/Range  |
+| -------------- | -------------------------- | ----------- |
+| $L_1$          | Luminance of lighter color | float, 0–1  |
+| $L_2$          | Luminance of darker color  | float, 0–1  |
+| $\text{ratio}$ | Contrast ratio             | float, 1–21 |
 
 **Pseudocode**
 
@@ -101,6 +103,7 @@ function getContrastRatio(L_bg: number, L_text: number): number {
 ```
 
 **Gotchas**
+
 - Always divide larger by smaller — sort before dividing
 - Result of 1 = no contrast, 21 = max contrast (black on white)
 - WCAG AA normal text minimum: 4.5
@@ -135,15 +138,15 @@ $$
 
 **Variables**
 
-| Symbol | Name | Type/Range |
-|---|---|---|
-| $R, G, B$ | RGB channels | float, 0–1 (divide raw by 255 first) |
-| $C_{\max}$ | Largest channel value | float, 0–1 |
-| $C_{\min}$ | Smallest channel value | float, 0–1 |
-| $\Delta$ | Channel range | float, 0–1 |
-| $L$ | Lightness | float, 0–1 |
-| $S$ | Saturation | float, 0–1 |
-| $H$ | Hue | float, 0–360 |
+| Symbol     | Name                   | Type/Range                           |
+| ---------- | ---------------------- | ------------------------------------ |
+| $R, G, B$  | RGB channels           | float, 0–1 (divide raw by 255 first) |
+| $C_{\max}$ | Largest channel value  | float, 0–1                           |
+| $C_{\min}$ | Smallest channel value | float, 0–1                           |
+| $\Delta$   | Channel range          | float, 0–1                           |
+| $L$        | Lightness              | float, 0–1                           |
+| $S$        | Saturation             | float, 0–1                           |
+| $H$        | Hue                    | float, 0–360                         |
 
 **Pseudocode**
 
@@ -175,6 +178,7 @@ function rgbToHsl(R255: number, G255: number, B255: number): [H, S, L] {
 ```
 
 **Gotchas**
+
 - Input RGB must be 0–1 (divide by 255 first)
 - H can go negative from the mod — add 360 if `H < 0`
 - JS `%` is remainder not true modulo — negative values stay negative
@@ -204,16 +208,16 @@ $$
 
 **Variables**
 
-| Symbol | Name | Type/Range |
-|---|---|---|
-| $H$ | Hue | float, 0–360 |
-| $S$ | Saturation | float, 0–1 |
-| $L$ | Lightness | float, 0–1 |
-| $C$ | Chroma (intermediate) | float, 0–1 |
-| $X$ | Secondary chroma (intermediate) | float, 0–1 |
-| $m$ | Lightness offset (intermediate) | float, 0–1 |
-| $R', G', B'$ | Pre-offset RGB (intermediate) | float, 0–1 |
-| $R, G, B$ | Final RGB output | integer, 0–255 |
+| Symbol       | Name                            | Type/Range     |
+| ------------ | ------------------------------- | -------------- |
+| $H$          | Hue                             | float, 0–360   |
+| $S$          | Saturation                      | float, 0–1     |
+| $L$          | Lightness                       | float, 0–1     |
+| $C$          | Chroma (intermediate)           | float, 0–1     |
+| $X$          | Secondary chroma (intermediate) | float, 0–1     |
+| $m$          | Lightness offset (intermediate) | float, 0–1     |
+| $R', G', B'$ | Pre-offset RGB (intermediate)   | float, 0–1     |
+| $R, G, B$    | Final RGB output                | integer, 0–255 |
 
 **Pseudocode**
 
@@ -241,6 +245,7 @@ function hslToRgb(H: number, S: number, L: number): [R, G, B] {
 ```
 
 **Gotchas**
+
 - $C$, $X$, $m$ are intermediate values — not saved, just used to compute RGB
 - Multiply by 255 and round at the end to get integer output
 - Use `Math.abs((H / 60) % 2 - 1)` carefully — JS `%` on floats can give unexpected results near boundaries
@@ -265,14 +270,14 @@ $$
 
 **Variables**
 
-| Symbol | Name | Type/Range |
-|---|---|---|
-| $L_{bg}$ | Background lightness | float, 0–1 |
-| $L_t$ | Text lightness (output) | float, 0–1 |
-| $H_{bg}$ | Background hue | float, 0–360 |
-| $H_t$ | Text hue (output) | float, 0–360 |
-| $S_{bg}$ | Background saturation | float, 0–1 |
-| $S_t$ | Text saturation (output) | float, 0–1 |
+| Symbol   | Name                     | Type/Range   |
+| -------- | ------------------------ | ------------ |
+| $L_{bg}$ | Background lightness     | float, 0–1   |
+| $L_t$    | Text lightness (output)  | float, 0–1   |
+| $H_{bg}$ | Background hue           | float, 0–360 |
+| $H_t$    | Text hue (output)        | float, 0–360 |
+| $S_{bg}$ | Background saturation    | float, 0–1   |
+| $S_t$    | Text saturation (output) | float, 0–1   |
 
 **Pseudocode**
 
@@ -287,6 +292,7 @@ function getOptimizedTextHSL(H_bg: number, S_bg: number, L_bg: number): [H, S, L
 ```
 
 **Gotchas**
+
 - $L_t$ and $S_t$ are ranges — the pseudocode uses midpoints; adjust to taste
 - Skip hue rotation if $S_{bg} < 0.15$ (near-neutral — hue has no effect)
 - `% 360` keeps hue within 0–360 after adding 180
@@ -301,9 +307,9 @@ $$
 
 **Variables**
 
-| Symbol | Name |
-|---|---|
-| $L^*, a^*, b^*$ | CIELAB color space channels |
-| $\Delta E$ | Perceptual color difference (higher = more different) |
+| Symbol          | Name                                                  |
+| --------------- | ----------------------------------------------------- |
+| $L^*, a^*, b^*$ | CIELAB color space channels                           |
+| $\Delta E$      | Perceptual color difference (higher = more different) |
 
 **Implementation note:** Converting RGB to CIELAB requires an intermediate XYZ conversion step. Use a library (`chroma-js`, `culori`) rather than implementing manually. HSL is not perceptually uniform and cannot be used for $\Delta E$.
