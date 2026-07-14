@@ -1,29 +1,37 @@
 import styled from "styled-components";
 import { MirrorSet } from "../utils";
 
-const StyledColorBox = styled.div`
-  max-width: 95%;
-  border-radius: 10px;
-  margin: 20px auto;
-  align-items: baseline;
+const StyledColorBox = styled.table`
+  margin: 12px;
+  border-collapse: separate;
+  border-spacing: 12px;
   font-size: 1rem;
   text-align: left;
   white-space: pre-wrap;
   font-weight: bold;
+  vertical-align: middle;
 `;
 
-const Line = styled.div`
-  display: flex;
+const Cell = styled.td`
+  vertical-align: middle;
+`;
+
+const DescCell = styled.td`
+  background-color: #efefef;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px grey;
+  padding: 6px 8px;
+  color: #121212;
+  font-family: sans-serif;
 `;
 
 const Hex = styled.div`
   border-radius: 10px;
   background-color: #eeeeee;
-  align-content: center;
-  padding: 2px 4px;
-  margin: 5px 15px 5px 5px;
+  padding: 4px 6px;
   box-shadow: 2px 2px 2px grey;
   font-weight: normal;
+  text-wrap: nowrap;
 `;
 
 const poem = [
@@ -38,16 +46,16 @@ const poem = [
   "    In her tomb by the sounding sea.",
 ];
 
-const about = [
-  "This one uses the complementary Hue, Saturation, and Lightness.",
-  "This one uses the complementary Hue and Saturation.",
-  "This one uses the complementary Hue and Lightness.",
-  "This one uses the complementary Hue.",
-  "This one uses the complementary Saturation and Lightness.",
-  "This one uses the complementary Saturation.",
-  "This one uses the complementary Lightness.",
-  "This one utilizes estimated hexcode differences through Google Sheets light and dark mode views.",
-  "This one uses the difference between the midpoint of 255 and the RGB value.",
+const desc = [
+  "Complementary hue, saturation, and lightness.",
+  "Complementary hue and saturation.",
+  "Complementary hue and lightness.",
+  "Complementary hue.",
+  "Complementary saturation and lightness.",
+  "Complementary saturation.",
+  "Complementary lightness.",
+  "A fixed shift of each RGB channel toward a lighter or darker sibling.",
+  "The photographic negative, inverting each RGB channel across the 0 to 255 range.",
 ];
 
 interface ColorBoxProps {
@@ -58,12 +66,17 @@ const ColorBox = ({ set }: ColorBoxProps) => {
   const hexSet = Object.values(set);
   return (
     <StyledColorBox>
-      {poem.map((line, i) => (
-        <Line key={i} title={about[i]}>
-          <Hex>{`#${hexSet[i]}:`}</Hex>
-          <div style={{ color: `#${hexSet[i]}` }}>{line}</div>
-        </Line>
-      ))}
+      <tbody>
+        {poem.map((line, i) => (
+          <tr key={i}>
+            <Cell>
+              <Hex>{`#${hexSet[i]}:`}</Hex>
+            </Cell>
+            <Cell style={{ color: `#${hexSet[i]}` }}>{line}</Cell>
+            <DescCell className="desc">{desc[i]}</DescCell>
+          </tr>
+        ))}
+      </tbody>
     </StyledColorBox>
   );
 };

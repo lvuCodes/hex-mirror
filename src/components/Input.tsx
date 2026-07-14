@@ -7,7 +7,7 @@ import { isHexCode, hexStringToRGB, calculateHexAttr } from "../utils";
 const StyledInput = styled.div`
   width: 90%;
   border-radius: 10px;
-  margin: 20px auto;
+  margin: 20px auto 12px;
   display: flex;
   justify-content: center;
   align-items: baseline;
