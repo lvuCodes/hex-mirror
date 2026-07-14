@@ -1,8 +1,9 @@
-package-lock.json
 yarn.lock
 .DS_Store
-node-modules
 pnpm-lock.yaml
+
+# Vendored Obsidian plugin lockfiles — keep only the app's own package-lock.json
+.obsidian/**/package-lock.json
 *.log
 node_modules
 dist

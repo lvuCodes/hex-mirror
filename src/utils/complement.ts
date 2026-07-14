@@ -2,13 +2,16 @@ import { decToHex, hexStringToRGB, rgbToHexString } from "./hexadecimal";
 import { getHSL, hslToHex, complementHSL } from "./hsl";
 import type { HSLValues, MirrorSet } from "./types";
 
+/** The 8-bit complement of a single channel — reflecting v across the 0–255 range (255 − v). */
+export const complementChannel = (v: number): number => 255 - v;
+
 /** The 0–255 complement of a single channel, with its hex form. */
 export const getComplementValues = (
   num: number
-): { dec: number; hex: string } => ({
-  dec: 255 - num,
-  hex: decToHex(255 - num),
-});
+): { dec: number; hex: string } => {
+  const dec = complementChannel(num);
+  return { dec, hex: decToHex(dec) };
+};
 
 // Average Absolute Diff - Google Sheets dark vs light
 // (calculated by avgHex)
@@ -20,8 +23,10 @@ export const getComplementValues = (
 // Saturation   0         0.0200    0.0200    2
 // Lightness    0.4509    0.4511    0.0001    0.0003
 
-const RGB_CHANGE = 113 + Math.round(Math.random() * 4);
-const RGB_MIDPOINT = 255 / 2;
+// 115 is the observed mean of the per-channel shift (the 113–117 spread above);
+// fixed rather than randomized so the mirror is deterministic and importing this
+// module has no side effect.
+const RGB_CHANGE = 115;
 
 const clampChannel = (n: number): number => Math.max(0, Math.min(255, n));
 
@@ -36,14 +41,13 @@ export const getGSheetsComp = (hex: string): string => {
   });
 };
 
-/** Reflect each RGB channel across the 0–255 midpoint (equivalent to 255 − v). */
+/** Reflect each RGB channel across the 0–255 midpoint — identical to the channel complement (255 − v). */
 export const getMidpointComp = (hex: string): string => {
   const { red, green, blue } = hexStringToRGB(hex);
-  const reflect = (v: number): number => 2 * RGB_MIDPOINT - v;
   return rgbToHexString({
-    red: reflect(red),
-    green: reflect(green),
-    blue: reflect(blue),
+    red: complementChannel(red),
+    green: complementChannel(green),
+    blue: complementChannel(blue),
   });
 };
 

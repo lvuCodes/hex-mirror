@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import {
   getComplementValues,
+  getGSheetsComp,
   getMidpointComp,
   getMirrorSet,
 } from "./complement";
@@ -25,6 +26,14 @@ describe("getMidpointComp", () => {
 
   it("returns a well-formed 6-digit hex string", () => {
     expect(getMidpointComp("3366CC")).toMatch(HEX_6);
+  });
+});
+
+describe("getGSheetsComp", () => {
+  it("is deterministic — shifts each channel by the fixed 115 toward the opposite band", () => {
+    // 3366CC → rgb(51,102,204), lum 0.5 (not < 0.5) ⇒ delta −115 ⇒ (0,0,89).
+    expect(getGSheetsComp("3366CC")).toBe("000059");
+    expect(getGSheetsComp("3366CC")).toBe(getGSheetsComp("3366CC"));
   });
 });
 

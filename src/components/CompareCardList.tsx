@@ -12,6 +12,10 @@ const StyledCompareCard = styled.div`
   border: 2px solid grey;
   border-radius: 10px;
   margin: auto;
+
+  th {
+    width: 20%;
+  }
 `;
 
 const CompareCardList = () => {
@@ -59,10 +63,9 @@ const CompareCard = ({ item }: { item: CompareItem }) => {
       <table>
         <tbody>
           <tr>
-            <th style={{ width: "20%" }}></th>
+            <th></th>
             <th
               style={{
-                width: "20%",
                 backgroundColor: `#${hexA.hex}`,
                 color: `#${hexB.hex}`,
               }}
@@ -71,15 +74,14 @@ const CompareCard = ({ item }: { item: CompareItem }) => {
             </th>
             <th
               style={{
-                width: "20%",
                 backgroundColor: `#${hexB.hex}`,
                 color: `#${hexA.hex}`,
               }}
             >
               {hexB.hex}
             </th>
-            <th style={{ width: "20%" }}>|diff|</th>
-            <th style={{ width: "20%" }}>% diff</th>
+            <th>|diff|</th>
+            <th>% diff</th>
           </tr>
           <CompareRow label="Red" a={hexAFull.RGB?.red} b={hexBFull.RGB?.red} />
           <CompareRow

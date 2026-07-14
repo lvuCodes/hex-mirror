@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Classnames from "classnames";
+import cx from "classnames";
+import { ChangeEvent, useState } from "react";
 import { useColorList } from "../hooks";
-import { ChangeEvent, useEffect, useState } from "react";
 import { isHexCode, hexStringToRGB, calculateHexAttr } from "../utils";
 
 const StyledInput = styled.div`
@@ -33,28 +33,23 @@ const StyledInput = styled.div`
 
 const Input = () => {
   const { inputItem, updateItem } = useColorList();
-
   const [inputValue, setInputValue] = useState<string>(
     inputItem.hex.replace("#", "")
   );
-  const [isValid, setIsValid] = useState<boolean>(isHexCode(inputItem.hex));
 
-  const inputClass = Classnames("input-field", {
-    error: !isValid,
-  });
-
-  useEffect(() => {
-    const stripped = inputValue.replace("#", "");
-    const valid = isHexCode(stripped);
-    setIsValid(valid);
-
-    if (valid) {
-      updateItem(0, calculateHexAttr(hexStringToRGB(stripped)));
-    }
-  }, [inputValue]);
+  // Validity is a pure function of the current input, so derive it during render
+  // rather than mirroring it into state via an effect.
+  const isValid = isHexCode(inputValue);
+  const inputClass = cx("input-field", { error: !isValid });
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value.replace("#", ""));
+    const stripped = event.target.value.replace("#", "");
+    setInputValue(stripped);
+    // Push only well-formed hex into the store; the change event is the right
+    // place for the dispatch, so no post-render effect is needed.
+    if (isHexCode(stripped)) {
+      updateItem(0, calculateHexAttr(hexStringToRGB(stripped)));
+    }
   };
 
   return (
@@ -65,7 +60,7 @@ const Input = () => {
         id="hex-input"
         name="hex-input"
         value={`#${inputValue.toUpperCase()}`}
-        onChange={(e) => handleChange(e)}
+        onChange={handleChange}
       />
     </StyledInput>
   );
