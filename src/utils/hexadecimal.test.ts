@@ -38,6 +38,12 @@ describe("hexStringToRGB", () => {
     expect(hexStringToRGB("abc")).toEqual(hexStringToRGB("aabbcc"));
     expect(hexStringToRGB("F00")).toEqual({ red: 255, green: 0, blue: 0 });
   });
+
+  it("throws on malformed input instead of returning NaN channels", () => {
+    expect(() => hexStringToRGB("GGG")).toThrow();
+    expect(() => hexStringToRGB("12345")).toThrow();
+    expect(() => hexStringToRGB("")).toThrow();
+  });
 });
 
 describe("isHexCode", () => {

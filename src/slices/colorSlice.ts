@@ -6,21 +6,14 @@ export interface ColorList {
   items: ColorCard[];
 }
 
-// Seed the input card with a random color.
-const {
-  RGB: { red, green, blue },
-} = getRandomHex();
 export const initialState: ColorList = {
-  items: [calculateHexAttr({ red, green, blue })],
+  items: [calculateHexAttr({ red: 0, green: 0, blue: 0 })],
 };
 
 const colorListSlice = createSlice({
   name: "colorList",
   initialState,
   reducers: {
-    addItem: (state, action: PayloadAction<ColorCard>) => {
-      state.items.push(action.payload);
-    },
     updateItem: (
       state,
       action: PayloadAction<{ index: number; item: ColorCard }>
@@ -30,8 +23,11 @@ const colorListSlice = createSlice({
   },
 });
 
-export const { addItem, updateItem } = colorListSlice.actions;
+export const { updateItem } = colorListSlice.actions;
 export default colorListSlice.reducer;
+
+export const seedRandomColor = () =>
+  updateItem({ index: 0, item: calculateHexAttr(getRandomHex().RGB) });
 
 const selectColorList = ({ colorList }: RootState): ColorList => colorList;
 

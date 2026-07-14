@@ -60,10 +60,10 @@ src/
   App.tsx                Root component
   store.ts               Redux store configuration
   hooks.ts               Typed Redux hooks + selectors
-  slices/                Redux slices (color input, compare list)
-  components/            UI components (DisplayCard, Input, ColorBox, ...)
-  utils/                 Color math (hexadecimal, decimal, rgb, hsl, complement, compare)
+  slices/                Redux slices (color input)
+  components/            UI components (DisplayCard, Input, ColorBox)
+  utils/                 Color math (hexadecimal, decimal, hsl, complement)
   test/                  Test setup
 ```
 
-Color calculations live in `src/utils/` and are covered by co-located `*.test.ts` files.
+Color calculations live in `src/utils/` and are covered by co-located `*.test.ts` files. A module dependency map is in [`reference/architecture-dependencies.md`](reference/architecture-dependencies.md).

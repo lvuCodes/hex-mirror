@@ -6,6 +6,9 @@ export const decToHex = (num: number): string =>
 export const hexToDec = (hex: string): number => parseInt(hex, 16);
 
 export const hexStringToRGB = (hex: string): RGBChannels => {
+  if (!isHexCode(hex)) {
+    throw new Error(`hexStringToRGB: "${hex}" is not a 3- or 6-digit hex color`);
+  }
   // Expand 3-digit shorthand ("abc" → "aabbcc") so it round-trips like 6-digit.
   const full =
     hex.length === 3

@@ -46,39 +46,45 @@ const poem = [
   "    In her tomb by the sounding sea.",
 ];
 
-const desc = [
-  "Complementary hue, saturation, and lightness.",
-  "Complementary hue and saturation.",
-  "Complementary hue and lightness.",
-  "Complementary hue.",
-  "Complementary saturation and lightness.",
-  "Complementary saturation.",
-  "Complementary lightness.",
-  "A fixed shift of each RGB channel toward a lighter or darker sibling.",
-  "The photographic negative, inverting each RGB channel across the 0 to 255 range.",
+const MIRROR_ROWS: { key: keyof MirrorSet; desc: string }[] = [
+  { key: "mirror_HSL", desc: "Complementary hue, saturation, and lightness." },
+  { key: "mirror_HSl", desc: "Complementary hue and saturation." },
+  { key: "mirror_HsL", desc: "Complementary hue and lightness." },
+  { key: "mirror_Hsl", desc: "Complementary hue." },
+  { key: "mirror_hSL", desc: "Complementary saturation and lightness." },
+  { key: "mirror_hSl", desc: "Complementary saturation." },
+  { key: "mirror_hsL", desc: "Complementary lightness." },
+  {
+    key: "mirror_gsheet",
+    desc: "A fixed shift of each RGB channel toward a lighter or darker sibling.",
+  },
+  {
+    key: "mirror_midpoint",
+    desc: "The photographic negative, inverting each RGB channel across the 0 to 255 range.",
+  },
 ];
 
 interface ColorBoxProps {
   set: MirrorSet;
 }
 
-const ColorBox = ({ set }: ColorBoxProps) => {
-  const hexSet = Object.values(set);
-  return (
-    <StyledColorBox>
-      <tbody>
-        {poem.map((line, i) => (
-          <tr key={i}>
+const ColorBox = ({ set }: ColorBoxProps) => (
+  <StyledColorBox>
+    <tbody>
+      {MIRROR_ROWS.map(({ key, desc }, i) => {
+        const hex = set[key];
+        return (
+          <tr key={key}>
             <Cell>
-              <Hex>{`#${hexSet[i]}:`}</Hex>
+              <Hex>{`#${hex}:`}</Hex>
             </Cell>
-            <Cell style={{ color: `#${hexSet[i]}` }}>{line}</Cell>
-            <DescCell className="desc">{desc[i]}</DescCell>
+            <Cell style={{ color: `#${hex}` }}>{poem[i]}</Cell>
+            <DescCell className="desc">{desc}</DescCell>
           </tr>
-        ))}
-      </tbody>
-    </StyledColorBox>
-  );
-};
+        );
+      })}
+    </tbody>
+  </StyledColorBox>
+);
 
 export default ColorBox;

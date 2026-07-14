@@ -40,14 +40,3 @@ export interface ColorCard {
   HSLComp: HSLValues;
   mirrorSet: MirrorSet;
 }
-
-export interface HexEntry {
-  hex: string;
-  RGB?: RGBValues;
-  HSL?: HSLValues;
-}
-
-export interface CompareItem {
-  hexA: HexEntry;
-  hexB: HexEntry;
-}
