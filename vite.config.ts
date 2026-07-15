@@ -14,5 +14,9 @@ export default defineConfig(({ command }) => ({
     setupFiles: "./src/test/setup.ts",
     css: false,
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    coverage: {
+      provider: "v8",
+      thresholds: { statements: 71, branches: 90, functions: 80, lines: 71 },
+    },
   },
 }));
