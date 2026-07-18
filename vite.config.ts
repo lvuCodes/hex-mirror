@@ -16,7 +16,11 @@ export default defineConfig(({ command }) => ({
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
     coverage: {
       provider: "v8",
-      thresholds: { statements: 71, branches: 90, functions: 80, lines: 71 },
+      all: true,
+      include: ["src/**/*.{ts,tsx}"],
+      exclude: ["src/**/*.{test,spec}.{ts,tsx}", "src/index.tsx", "src/vite-env.d.ts"],
+      reporter: ["text", "html"],
+      thresholds: { statements: 100, branches: 95, functions: 100, lines: 100 },
     },
   },
 }));
