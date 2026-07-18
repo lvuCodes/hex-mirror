@@ -17,7 +17,7 @@ const Cell = styled.td`
 `;
 
 const DescCell = styled.td`
-  background-color: #efefef;
+  background-color: #D8D8D8;
   border-radius: 10px;
   box-shadow: 2px 2px 2px grey;
   padding: 6px 8px;
@@ -27,7 +27,7 @@ const DescCell = styled.td`
 
 const Hex = styled.div`
   border-radius: 10px;
-  background-color: #eeeeee;
+  background-color: #D8D8D8;
   padding: 4px 6px;
   box-shadow: 2px 2px 2px grey;
   font-weight: normal;
