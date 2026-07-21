@@ -42,6 +42,8 @@
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "verify": "npm run lint && npm run test && npm run build",
+    "prepare": "git config core.hooksPath .githooks"
   }
 }
