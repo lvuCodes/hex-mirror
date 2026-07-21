@@ -26,4 +26,14 @@ describe("ColorBox", () => {
     );
     expect(line).toHaveStyle({ color: `#${mirrorSet.mirror_HSl}` });
   });
+
+  it("stacks each row vertically on narrow viewports", () => {
+    render(<ColorBox set={mirrorSet} />);
+    const css = Array.from(document.querySelectorAll("style"))
+      .map((tag) => tag.textContent ?? "")
+      .join("");
+
+    expect(css).toContain("@media (max-width:720px)");
+    expect(css).toMatch(/flex-direction:\s*column/);
+  });
 });

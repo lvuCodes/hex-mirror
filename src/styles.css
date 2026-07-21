@@ -3,6 +3,10 @@
   text-align: center;
 }
 
+.page {
+  margin-top: 48px;
+}
+
 html {
   background-color: #D8D8D8;
 }

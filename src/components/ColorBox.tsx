@@ -12,6 +12,30 @@ const StyledColorBox = styled.table`
   white-space: pre-wrap;
   font-weight: bold;
   vertical-align: middle;
+
+  @media (max-width: 720px) {
+    display: block;
+    border-spacing: 0;
+
+    tbody {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    tr {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    td {
+      display: block;
+      max-width: 100%;
+      overflow-wrap: break-word;
+    }
+  }
 `;
 
 const Cell = styled.td`
