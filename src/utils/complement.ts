@@ -1,3 +1,5 @@
+// Hex Mirror. Copyright (C) 2026 lvuCodes. Licensed under GPL-3.0-or-later; see LICENSE.
+
 import { decToHex, hexStringToRGB, rgbToHexString } from "./hexadecimal";
 import { getHSL, hslToHex, complementHSL } from "./hsl";
 import type { HSLValues, MirrorSet } from "./types";

@@ -1,3 +1,5 @@
+// Hex Mirror. Copyright (C) 2026 lvuCodes. Licensed under GPL-3.0-or-later; see LICENSE.
+
 import { toRGBValues, rgbToHexString } from "./hexadecimal";
 import { getRandom256 } from "./decimal";
 import { getComplementValues, getMirrorSet } from "./complement";

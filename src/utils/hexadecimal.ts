@@ -1,3 +1,5 @@
+// Hex Mirror. Copyright (C) 2026 lvuCodes. Licensed under GPL-3.0-or-later; see LICENSE.
+
 import type { RGBChannels, RGBValues } from "./types";
 
 export const decToHex = (num: number): string =>

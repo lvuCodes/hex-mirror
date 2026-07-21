@@ -1,3 +1,5 @@
+// Hex Mirror. Copyright (C) 2026 lvuCodes. Licensed under GPL-3.0-or-later; see LICENSE.
+
 // Centralized domain types for color values and comparison data.
 
 /** The three raw 0–255 RGB channels — the primitive color input shape. */

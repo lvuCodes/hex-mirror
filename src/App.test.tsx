@@ -17,3 +17,24 @@ describe("App", () => {
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });
 });
+
+describe("footer copyright", () => {
+  it("carries the GPL notice and links the license", () => {
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    );
+
+    const notice = screen.getByText(/© 2026/);
+    expect(notice.textContent).toContain("Free software under the");
+
+    const license = screen.getByRole("link", { name: "GNU GPL v3" });
+    expect(license.getAttribute("href")).toBe(
+      "https://github.com/lvuCodes/hex-mirror/blob/main/LICENSE"
+    );
+    expect(
+      screen.getByRole("link", { name: "lvuCodes" }).getAttribute("href")
+    ).toBe("https://github.com/lvuCodes");
+  });
+});
