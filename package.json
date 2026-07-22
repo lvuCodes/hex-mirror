@@ -5,7 +5,7 @@
   "type": "module",
   "prettier": "@lvucodes/ui/prettier",
   "dependencies": {
-    "@lvucodes/ui": "^0.1.0",
+    "@lvucodes/ui": "^0.1.1",
     "@reduxjs/toolkit": "^2.9.0",
     "classnames": "^2.5.1",
     "react": "^19.2.0",

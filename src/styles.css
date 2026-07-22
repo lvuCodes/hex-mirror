@@ -2,6 +2,7 @@
    @lvucodes/ui/theme.css's defaults (imported first in the entry). Values are the
    site's own hand-tuned greys, kept verbatim; only the names are new. */
 :root {
+  color-scheme: light;
   --bg: #d8d8d8; /* page background */
   --panel: #d8d8d8; /* card / box surfaces */
   --text: #121212; /* body text */
