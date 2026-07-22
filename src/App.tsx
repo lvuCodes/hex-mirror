@@ -1,8 +1,7 @@
 // Hex Mirror. Copyright (C) 2026 lvuCodes. Licensed under GPL-3.0-or-later; see LICENSE.
 
-import "./styles.css";
 import InputCard from "./components/DisplayCard";
-import { BackLink } from "./back-link";
+import { BackLink } from "@lvucodes/ui";
 
 export default function App() {
   return (

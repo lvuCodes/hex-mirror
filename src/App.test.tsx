@@ -9,11 +9,9 @@ describe("App", () => {
     render(
       <Provider store={store}>
         <App />
-      </Provider>
+      </Provider>,
     );
-    expect(
-      screen.getByRole("heading", { level: 1, name: "Hex Mirror" })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "Hex Mirror" })).toBeInTheDocument();
     expect(screen.getByRole("textbox")).toBeInTheDocument();
   });
 });
@@ -23,7 +21,7 @@ describe("footer copyright", () => {
     render(
       <Provider store={store}>
         <App />
-      </Provider>
+      </Provider>,
     );
 
     const notice = screen.getByText(/© 2026/);
@@ -31,10 +29,10 @@ describe("footer copyright", () => {
 
     const license = screen.getByRole("link", { name: "GNU GPL v3" });
     expect(license.getAttribute("href")).toBe(
-      "https://github.com/lvuCodes/hex-mirror/blob/main/LICENSE"
+      "https://github.com/lvuCodes/hex-mirror/blob/main/LICENSE",
     );
-    expect(
-      screen.getByRole("link", { name: "lvuCodes" }).getAttribute("href")
-    ).toBe("https://github.com/lvuCodes");
+    expect(screen.getByRole("link", { name: "lvuCodes" }).getAttribute("href")).toBe(
+      "https://github.com/lvuCodes",
+    );
   });
 });

@@ -1,10 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {
-  getComplementValues,
-  getGSheetsComp,
-  getMidpointComp,
-  getMirrorSet,
-} from "./complement";
+import { getComplementValues, getGSheetsComp, getMidpointComp, getMirrorSet } from "./complement";
 import { getHSL } from "./hsl";
 import { hexStringToRGB } from "./hexadecimal";
 

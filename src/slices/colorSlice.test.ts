@@ -1,10 +1,5 @@
 import { describe, it, expect } from "vitest";
-import reducer, {
-  updateItem,
-  seedRandomColor,
-  selectItems,
-  initialState,
-} from "./colorSlice";
+import reducer, { updateItem, seedRandomColor, selectItems, initialState } from "./colorSlice";
 import { RootInitialState } from "../store";
 import { calculateHexAttr, isHexCode } from "../utils";
 

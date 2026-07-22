@@ -15,10 +15,15 @@
  * this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
+// Theme palette first so the shared token defaults are in place; App transitively
+// pulls in @lvucodes/ui's .pill primitive, and the site stylesheet loads LAST so
+// its own token overrides and .pill skin win the equal-specificity cascade.
+import "@lvucodes/ui/theme.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import App from "./App";
+import "./styles.css";
 import store from "./store";
 import { seedRandomColor } from "./slices/colorSlice";
 
@@ -32,5 +37,5 @@ root.render(
     <Provider store={store}>
       <App />
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

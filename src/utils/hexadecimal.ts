@@ -2,8 +2,7 @@
 
 import type { RGBChannels, RGBValues } from "./types";
 
-export const decToHex = (num: number): string =>
-  num.toString(16).padStart(2, "0").toUpperCase();
+export const decToHex = (num: number): string => num.toString(16).padStart(2, "0").toUpperCase();
 
 export const hexToDec = (hex: string): number => parseInt(hex, 16);
 

@@ -1,3 +1,16 @@
+/* Site chrome tokens. Defined here in the site root stylesheet so they override
+   @lvucodes/ui/theme.css's defaults (imported first in the entry). Values are the
+   site's own hand-tuned greys, kept verbatim; only the names are new. */
+:root {
+  --bg: #d8d8d8; /* page background */
+  --panel: #d8d8d8; /* card / box surfaces */
+  --text: #121212; /* body text */
+  --text-h: #121212; /* headings / primary text */
+  --border: grey; /* hairline borders and drop shadows */
+  --error: red; /* invalid-input state */
+}
+
+/* stylelint-disable-next-line selector-class-pattern -- .App is existing public class surface */
 .App {
   font-family: monospace;
   text-align: center;
@@ -8,7 +21,7 @@
 }
 
 html {
-  background-color: #D8D8D8;
+  background-color: var(--bg);
 }
 
 /* ---- pill primitive ---- */

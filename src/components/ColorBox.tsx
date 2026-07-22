@@ -1,64 +1,7 @@
 // Hex Mirror. Copyright (C) 2026 lvuCodes. Licensed under GPL-3.0-or-later; see LICENSE.
 
-import styled from "styled-components";
+import "./ColorBox.css";
 import { MirrorSet } from "../utils";
-
-const StyledColorBox = styled.table`
-  margin: 12px;
-  border-collapse: separate;
-  border-spacing: 12px;
-  font-size: 1rem;
-  text-align: left;
-  white-space: pre-wrap;
-  font-weight: bold;
-  vertical-align: middle;
-
-  @media (max-width: 720px) {
-    display: block;
-    border-spacing: 0;
-
-    tbody {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
-    tr {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-
-    td {
-      display: block;
-      max-width: 100%;
-      overflow-wrap: break-word;
-    }
-  }
-`;
-
-const Cell = styled.td`
-  vertical-align: middle;
-`;
-
-const DescCell = styled.td`
-  background-color: #D8D8D8;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px grey;
-  padding: 6px 8px;
-  color: #121212;
-  font-family: sans-serif;
-`;
-
-const Hex = styled.div`
-  border-radius: 10px;
-  background-color: #D8D8D8;
-  padding: 4px 6px;
-  box-shadow: 2px 2px 2px grey;
-  font-weight: normal;
-  text-wrap: nowrap;
-`;
 
 const poem = [
   "Excerpt from Annabel Lee by Edgar Allen Poe",
@@ -95,22 +38,24 @@ interface ColorBoxProps {
 }
 
 const ColorBox = ({ set }: ColorBoxProps) => (
-  <StyledColorBox>
+  <table className="color-box">
     <tbody>
       {MIRROR_ROWS.map(({ key, desc }, i) => {
         const hex = set[key];
         return (
           <tr key={key}>
-            <Cell>
-              <Hex>{`#${hex}:`}</Hex>
-            </Cell>
-            <Cell style={{ color: `#${hex}` }}>{poem[i]}</Cell>
-            <DescCell className="desc">{desc}</DescCell>
+            <td className="cell">
+              <div className="hex">{`#${hex}:`}</div>
+            </td>
+            <td className="cell" style={{ color: `#${hex}` }}>
+              {poem[i]}
+            </td>
+            <td className="desc">{desc}</td>
           </tr>
         );
       })}
     </tbody>
-  </StyledColorBox>
+  </table>
 );
 
 export default ColorBox;

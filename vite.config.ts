@@ -1,11 +1,13 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 
-export default defineConfig(({ command }) => ({
+export default defineConfig(({ command, isPreview }) => ({
   // Served from https://lvuCodes.github.io/hex-mirror/ on GitHub Pages, so the
-  // production build needs the repo-name base path. Dev stays at root.
-  base: command === "build" ? "/hex-mirror/" : "/",
-  plugins: [react({ babel: { plugins: ["babel-plugin-styled-components"] } })],
+  // production build needs the repo-name base path. `vite preview` serves that
+  // build (and the smoke suite runs against it), so it needs the same base; only
+  // the dev server stays at root.
+  base: command === "build" || isPreview ? "/hex-mirror/" : "/",
+  plugins: [react()],
   server: { port: 3000 },
   preview: { port: 3000 },
   test: {
@@ -13,6 +15,9 @@ export default defineConfig(({ command }) => ({
     environment: "jsdom",
     setupFiles: "./src/test/setup.ts",
     css: false,
+    // Inline the package so Vite transforms its bundled CSS imports; left
+    // externalized, Node's ESM loader chokes on `@lvucodes/ui`'s `.css` side effects.
+    server: { deps: { inline: ["@lvucodes/ui"] } },
     include: ["src/**/*.{test,spec}.{ts,tsx}"],
     coverage: {
       provider: "v8",

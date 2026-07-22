@@ -1,0 +1,61 @@
+/* Mirror table. Imported by the ColorBox component that owns it. Each poem line's
+   text color is data-driven (its mirror hex) and set inline; these classes carry
+   the static layout and surface skin only. */
+.color-box {
+  margin: 12px;
+  border-collapse: separate;
+  border-spacing: 12px;
+  font-size: 1rem;
+  text-align: left;
+  white-space: pre-wrap;
+  font-weight: bold;
+  vertical-align: middle;
+}
+
+@media (max-width: 720px) {
+  .color-box {
+    display: block;
+    border-spacing: 0;
+  }
+
+  .color-box tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .color-box tr {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .color-box td {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+}
+
+.cell {
+  vertical-align: middle;
+}
+
+.desc {
+  background-color: var(--panel);
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px var(--border);
+  padding: 6px 8px;
+  color: var(--text-h);
+  font-family: sans-serif;
+}
+
+.hex {
+  border-radius: 10px;
+  background-color: var(--panel);
+  padding: 4px 6px;
+  box-shadow: 2px 2px 2px var(--border);
+  font-weight: normal;
+  text-wrap: nowrap;
+}

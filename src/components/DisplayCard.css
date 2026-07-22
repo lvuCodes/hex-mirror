@@ -1,0 +1,10 @@
+/* Display card. Imported by the DisplayCard component that owns it. The card's
+   background and border colors are data-driven (engine output) and set inline;
+   this class carries only the static frame. */
+.display-card {
+  min-width: 20%;
+  max-width: 90%;
+  border: 4px solid var(--border);
+  border-radius: 10px;
+  margin: auto;
+}

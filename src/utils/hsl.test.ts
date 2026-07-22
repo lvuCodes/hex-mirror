@@ -30,6 +30,12 @@ describe("getHSL", () => {
     expect(getHSL({ red: 0, green: 255, blue: 0 }).hue).toBe(120);
     expect(getHSL({ red: 0, green: 0, blue: 255 }).hue).toBe(240);
   });
+
+  it("wraps a negative red-sextant hue back into 0–360", () => {
+    // red max with blue above green drives the raw hue negative, exercising the
+    // +360 wrap.
+    expect(getHSL({ red: 255, green: 0, blue: 128 }).hue).toBeCloseTo(329.88, 1);
+  });
 });
 
 describe("hslToHex", () => {

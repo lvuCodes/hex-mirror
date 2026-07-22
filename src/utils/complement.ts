@@ -8,9 +8,7 @@ import type { HSLValues, MirrorSet } from "./types";
 export const complementChannel = (v: number): number => 255 - v;
 
 /** The 0–255 complement of a single channel, with its hex form. */
-export const getComplementValues = (
-  num: number
-): { dec: number; hex: string } => {
+export const getComplementValues = (num: number): { dec: number; hex: string } => {
   const dec = complementChannel(num);
   return { dec, hex: decToHex(dec) };
 };

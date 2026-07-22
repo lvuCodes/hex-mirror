@@ -8,7 +8,7 @@ const renderInput = () =>
   render(
     <Provider store={store}>
       <Input />
-    </Provider>
+    </Provider>,
   );
 
 describe("Input", () => {

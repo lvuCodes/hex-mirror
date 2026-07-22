@@ -16,10 +16,7 @@ const colorListSlice = createSlice({
   name: "colorList",
   initialState,
   reducers: {
-    updateItem: (
-      state,
-      action: PayloadAction<{ index: number; item: ColorCard }>
-    ) => {
+    updateItem: (state, action: PayloadAction<{ index: number; item: ColorCard }>) => {
       state.items[action.payload.index] = action.payload.item;
     },
   },
@@ -33,7 +30,4 @@ export const seedRandomColor = () =>
 
 const selectColorList = ({ colorList }: RootState): ColorList => colorList;
 
-export const selectItems = createSelector(
-  selectColorList,
-  ({ items }) => items
-);
+export const selectItems = createSelector(selectColorList, ({ items }) => items);

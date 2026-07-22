@@ -12,7 +12,6 @@ export function useColorList() {
   return {
     items,
     inputItem: items[0],
-    updateItem: (index: number, item: ColorCard) =>
-      dispatch(updateItem({ index, item })),
+    updateItem: (index: number, item: ColorCard) => dispatch(updateItem({ index, item })),
   };
 }

@@ -1,0 +1,15 @@
+dist
+coverage
+node_modules
+package-lock.json
+playwright-report
+test-results
+
+# User-owned reference notes — never reformat.
+reference/
+
+# Vendored Obsidian config and plugin sources.
+.obsidian/
+
+# Stylesheets are hand-formatted and linted by stylelint instead.
+**/*.css
