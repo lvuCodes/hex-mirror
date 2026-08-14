@@ -117,6 +117,7 @@ That saturation branch is the formula-level statement of this whole note: when b
 - **Avoid saturated red↔blue adjacency** for text — chromostereopsis makes it float and strain.
 - **Do not rely on hue alone** — it fails for color-vision-deficient viewers and at small sizes.
 - **Use ΔE (CIEDE2000), not HSL/RGB distance,** to judge whether two colors are perceptually distinct.
+- **Measure the three vibration conditions in a perceptual space, not HSL** — see [`oklab-and-chromatic-vibration.md`](oklab-and-chromatic-vibration.md).
 - **Maximum contrast ≠ maximum comfort** — soften pure-white-on-pure-black for long reading.
 
 ## Sources
