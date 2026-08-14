@@ -8,7 +8,7 @@ export default defineConfig(({ command, isPreview }) => ({
   // the dev server stays at root.
   base: command === "build" || isPreview ? "/hex-mirror/" : "/",
   plugins: [react()],
-  server: { port: 3000 },
+  server: { port: 5818 },
   preview: { port: 3000 },
   test: {
     globals: true,
