@@ -26,7 +26,9 @@ import App from "./App";
 import "./styles.css";
 import store from "./store";
 import { seedRandomColor } from "./slices/colorSlice";
+import { seedDefaultTheme } from "./theme-boot";
 
+seedDefaultTheme();
 store.dispatch(seedRandomColor());
 
 const rootElement = document.getElementById("root")!;
