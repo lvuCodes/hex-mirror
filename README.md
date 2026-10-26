@@ -67,3 +67,7 @@ src/
 ```
 
 Color calculations live in `src/utils/` and are covered by co-located `*.test.ts` files. A module dependency map is in [`reference/architecture-dependencies.md`](reference/architecture-dependencies.md).
+
+## AI Usage
+
+See [AI-USAGE.md](AI-USAGE.md).
