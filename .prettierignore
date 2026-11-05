@@ -5,6 +5,10 @@ package-lock.json
 playwright-report
 test-results
 
+# Generated AI-usage disclosure and its ledger.
+AI-USAGE.md
+.ai-attribution
+
 # User-owned reference notes — never reformat.
 reference/
 

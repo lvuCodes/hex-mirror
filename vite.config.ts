@@ -18,7 +18,7 @@ export default defineConfig(({ command, isPreview }) => ({
     // Inline the package so Vite transforms its bundled CSS imports; left
     // externalized, Node's ESM loader chokes on `@lvucodes/ui`'s `.css` side effects.
     server: { deps: { inline: ["@lvucodes/ui"] } },
-    include: ["src/**/*.{test,spec}.{ts,tsx}"],
+    include: ["src/**/*.{test,spec}.{ts,tsx}", "scripts/**/*.test.mjs"],
     coverage: {
       provider: "v8",
       all: true,
