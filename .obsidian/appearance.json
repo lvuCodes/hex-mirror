@@ -1,8 +1,8 @@
 {
   "accentColor": "",
-  "monospaceFontFamily": "Latin Modern Mono Caps,Latin Modern Mono,Space Mono,Courier New,Courier",
-  "interfaceFontFamily": "Tsukushi B Round Gothic,Chalkduster,duxiupinyinti,Mengshen",
-  "textFontFamily": "Tsukushi A Round Gothic,Chalkboard,AaXiaoxuebapinyint (Non-Commercial Use),AaJiushiguangpinyint (Non-Commercial Use)",
+  "monospaceFontFamily": "Atkinson Hyperlegible Mono,Libertinus Mono,Latin Modern Mono Caps,Latin Modern Mono,Space Mono,Courier New,Courier",
+  "interfaceFontFamily": "Hepta Slab,Libertinus Serif,Tsukushi B Round Gothic,Chalkduster,duxiupinyinti,Mengshen",
+  "textFontFamily": "Atkinson Hyperlegible Next,Libertinus Sans,Tsukushi A Round Gothic,Chalkboard,AaXiaoxuebapinyint (Non-Commercial Use),AaJiushiguangpinyint (Non-Commercial Use)",
   "baseFontSize": 16,
   "enabledCssSnippets": [
     "font",
