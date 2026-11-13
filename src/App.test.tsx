@@ -35,4 +35,16 @@ describe("footer copyright", () => {
       "https://github.com/lvuCodes",
     );
   });
+
+  it("links the project's own repository in a new tab, named for the repo", () => {
+    render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    );
+    const repo = screen.getByRole("link", { name: "hex-mirror on GitHub" });
+    expect(repo.getAttribute("href")).toBe("https://github.com/lvuCodes/hex-mirror");
+    expect(repo.getAttribute("target")).toBe("_blank");
+    expect(repo.getAttribute("rel")).toBe("noreferrer noopener");
+  });
 });

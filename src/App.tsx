@@ -25,6 +25,14 @@ export default function App() {
             >
               GNU GPL v3
             </a>
+            .{" "}
+            <a
+              href="https://github.com/lvuCodes/hex-mirror"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              hex-mirror on GitHub
+            </a>
             .
           </p>
         </footer>

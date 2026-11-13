@@ -21,3 +21,6 @@ playwright-report
 test-results
 
 .ai-attribution/snapshots/.tmp/
+
+# Screen recordings stay local
+*.mov

@@ -1,17 +1,10 @@
-import { THEME_STORAGE_KEY, isThemeId, saveTheme } from "@lvucodes/ui";
+import type { ThemeId } from "@lvucodes/ui";
 
-// Seed the lvuCodes theme for first-time visitors while respecting an existing
-// choice. The storage key is shared across every site on this origin, so a
-// visitor who already picked a theme elsewhere keeps it; only an empty or
-// invalid slot is defaulted to lvuCodes before useTheme() reads it.
-export function seedDefaultTheme(): void {
-  let stored: string | null;
-  try {
-    stored = localStorage.getItem(THEME_STORAGE_KEY);
-  } catch {
-    stored = null;
-  }
-  if (!isThemeId(stored)) {
-    saveTheme("lvucodes");
-  }
+export const SITE_THEME: ThemeId = "lvucodes";
+
+// Pin this site to the lvuCodes theme regardless of the visitor's stored choice.
+// The storage key is shared across every site on this origin, so the theme is
+// set on <html> only and never written back to storage.
+export function applySiteTheme(): void {
+  document.documentElement.dataset.theme = SITE_THEME;
 }
